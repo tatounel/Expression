@@ -1,39 +1,35 @@
-import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import AwesomeButton from "react-native-really-awesome-button";
+import React from 'react';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import WelcomeScreen from './welcome.js';
+import loginScreen from './login';
+import signUpScreen from './signup';
 
-function Button(text) {
-  return (
-    <AwesomeButton
-      backgroundColor="#5ce1e6"
-      textColor="#000000"
-      style={(width = 700)}
-    >
-      {text}
-    </AwesomeButton>
-  );
-}
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Welcome to</Text>
-      <Image
-        style={{ width: 300, height: 200 }}
-        source={require("./assets/xpression.png")}
-      />
-      <Text>where artists and authors unite</Text>
-      {Button("Log In")}
-      {Button("Sign up")}
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#ff0080",
-    alignItems: "center",
-    justifyContent: "center"
+const MainNavigator = createStackNavigator({
+  Welcome: {screen: WelcomeScreen,
+    navigationOptions: () => ({
+    title: `Welcome`,
+    headerBackTitle: null,
+  })
+},
+  Login: {screen: loginScreen,
+    navigationOptions: () => ({
+    title: `Login Page`,
+    headerBackTitle: null,
+    })
+  },
+  Signup: {screen: signUpScreen,
+    navigationOptions: () => ({
+    title: `Sign Up Page`,
+    headerBackTitle: null,
+    })
   }
 });
+
+const AppContainer = createAppContainer(MainNavigator);
+
+export default class App extends React.Component{
+  render(){
+    return <AppContainer/>;
+  }
+}
