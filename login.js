@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View, Image, KeyboardAvoidingView, StatusBar } from "react-native";
 import AwesomeButton from "react-native-really-awesome-button";
 
+//Building a login that includes inputs of each placeholder needed to be filled out
 class loginScreen extends React.Component {
     render(){
         return(
@@ -17,7 +18,7 @@ class loginScreen extends React.Component {
                 
                 <View style = {styleLogin.loginContainer}>
                     <TextInput
-                    placeholder ="E-mail or username"
+                    placeholder ="E-mail or Username"
                     placeholderTextColor = "rgba(255,255,255,0.7)"
                     returnKeyType = "next"
                     onSubmitEditing={() => this.passwordInput.focus()}

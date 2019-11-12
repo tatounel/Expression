@@ -2,6 +2,8 @@ import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import AwesomeButton from "react-native-really-awesome-button";
 
+//building a class that includes the touchability to move forward to the next page for each button
+
 class WelcomeScreen extends React.Component {
     render(){
         return(
@@ -17,7 +19,7 @@ class WelcomeScreen extends React.Component {
                     textColor= "#000000"
                     backgroundColor= "#5ce1e6"
                     onPress = {() => this.props.navigation.navigate('Login')}
-                    >login
+                    >Log In
                     </AwesomeButton>
                     </View>
                     
