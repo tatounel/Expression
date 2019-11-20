@@ -1,5 +1,6 @@
 const db = require("./models");
 const { Artist, Author, Content, Genre, Match, Portfolio, Style } = db;
+var Sequelize = require("sequelize");
 
 const ARTISTS = [
   {
@@ -9,7 +10,7 @@ const ARTISTS = [
     style: "abstract expressionism",
     bio: "birthed my brother's triplets",
     interests: "smelly cats",
-    profile_pic: ""
+    profile_pic: " "
   },
   {
     id: 2,
@@ -18,7 +19,7 @@ const ARTISTS = [
     style: "renaissance",
     bio: "coming out of my shell and i've been doing just fine",
     interests: "pizza and fun",
-    profile_pic: ""
+    profile_pic: " "
   },
   {
     id: 3,
@@ -27,7 +28,7 @@ const ARTISTS = [
     style: "etch a sketch",
     bio: "scooby-dooby-doo",
     interests: "being a meddling kid",
-    profile_pic: ""
+    profile_pic: " "
   }
 ];
 
@@ -39,7 +40,7 @@ const AUTHORS = [
     genre: "fiction",
     bio: "RIP",
     interests: "writing emotional heartrending stories",
-    profile_pic: ""
+    profile_pic: " "
   },
   {
     id: 2,
@@ -49,7 +50,7 @@ const AUTHORS = [
     bio:
       "taking a well deserved break, just doing some post presidential work, no biggie",
     interests: "yes we can",
-    profile_pic: ""
+    profile_pic: " "
   },
   {
     id: 3,
@@ -58,7 +59,7 @@ const AUTHORS = [
     genre: "romance",
     bio: "hear ye, hear ye",
     interests: "helping students fail English since 1564",
-    profile_pic: ""
+    profile_pic: " "
   }
 ];
 
@@ -145,11 +146,19 @@ const MATCHES = [
   { artistId: 3, authorId: 3 }
 ];
 
-const seed = () => {
+(function seed() {
   return db.sequelize.sync({ force: true }).then(() => {
     // Create all the entries
-    let artistPromises = ARTISTS.map(a1 => Artist.create(a1));
-    let authorPromises = AUTHORS.map(a2 => Author.create(a2));
+    let artistPromises = ARTISTS.map(a1 =>
+      Artist.create(a1).catch(Sequelize.ValidationError, function(err) {
+        console.log(err);
+      })
+    );
+    let authorPromises = AUTHORS.map(a2 =>
+      Author.create(a2).catch(Sequelize.ValidationError, function(err) {
+        console.log(err);
+      })
+    );
     let contentPromises = CONTENTS.map(c => Content.create(c));
     let genrePromises = GENRES.map(g => Genre.create(g));
     let matchPromises = MATCHES.map(m => Match.create(m));
@@ -179,6 +188,6 @@ const seed = () => {
   //});
   //return Promise.all(associationPromises);
   //});
-};
+})();
 
-module.exports = seed;
+// module.exports = seed;

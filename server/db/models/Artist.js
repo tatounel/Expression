@@ -32,27 +32,27 @@ module.exports = (sequelize, DataTypes) => {
       },
       bio: {
         type: DataTypes.TEXT,
+        allowNull: true,
         validate: {
-          len: [1, 250],
-          notEmpty: false
+          len: [1, 250]
         },
         unique: false
       },
       interests: {
         type: DataTypes.TEXT,
+        allowNull: true,
         validate: {
-          len: [1, 250],
-          notEmpty: false
+          len: [1, 250]
         },
         unique: false
       },
       profile_pic: {
         type: DataTypes.STRING,
+        allowNull: true,
         validate: {
-          len: [1, 250],
-          notEmpty: false
+          len: [1, 250]
         },
-        unique: true
+        unique: false
       }
     },
     {
