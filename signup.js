@@ -121,7 +121,7 @@ const styleSignUp = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.2)',
         marginBottom: 10,
         color: '#FFF',
-        paddingHorizontal: 70,
+        paddingHorizontal: 103,
     },
 
     onebutton:{
@@ -146,7 +146,7 @@ const styleSignUp = StyleSheet.create({
     selectionType:{
         backgroundColor: 'rgba(255,255,255,0.2)',
         marginBottom: 10,
-        paddingHorizontal: 62
+        paddingHorizontal: 95
     },
      
 });

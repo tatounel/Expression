@@ -5,7 +5,7 @@ import WelcomeScreen from './welcome';
 import loginScreen from './login';
 import signUpScreen from './signup';
 import createProfileScreen from './createNewProfile';
-//import profileScreen from './profile';
+//import profileDisplayScreen from './profile';
 
 //Calling in the files for it to stack and work as a moving between screen
 
