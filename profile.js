@@ -1,27 +1,12 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import react from 'react';
+import AwesomeButton from 'react-native-really-awesome-button';
+import { StyleSheet, Text, View, Dimensions, TextInput, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import Image from "react-native-scalable-image";
 
-class profileScreen extends React.Component{
+export default class profileScreen extends React.Component{
     render(){
         return(
-            <View style = {StyleProfile.container}>
-                <Text>Please Create Your Profile</Text>
-                <Image style = {{width: 300, height: 200}}
-                source = {require("./assets/xpression.png")}/>
-                
-
-            </View>
-        );
+        <Text>Welcome back!</Text>
+        )
     }
 }
-
-export default profileScreen;
-
-const StyleProfile = StyleSheet.create({
-    container:{
-        flex: 1,
-        backgroundColor: "#ff0080",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-})

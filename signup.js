@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Image, KeyboardAvoidingView, StatusBar, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, Text, TextInput, View, Dimensions, KeyboardAvoidingView, StatusBar, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import AwesomeButton from "react-native-really-awesome-button";
-//import RNPickerSelect from "react-native-picker-select";
-import TypeOfHobby from './selectionView';
+import Image from "react-native-scalable-image";
+import ModalDropDown from "react-native-modal-dropdown";
 
-//Built a signup screen that includes text inputs of each placeholder. with no auto Cap and no auto correcting.
+//Built a signup screen that includes text inputs of each placeholder. with no auto Cap and no auto correcting. Making sure everytime 
+//you finish one part, it move onto the next one with the "next() or arrow" button depending on which device you have
+
 class signUpScreen extends React.Component {
     render(){
         return(
@@ -14,12 +16,14 @@ class signUpScreen extends React.Component {
                  barStyle = "light-content"
                 />
                 <Text>Welcome To</Text>
-                <Image style = {{width: 300, height: 200}}
+                <Image
+                width = {Dimensions.get('window').width}
                 source = {require("./assets/xpression.png")}/>
                 <Text>Where Artists and Authors Unite</Text>
 
                 <View style = {styleSignUp.rowContainer}>
                     <TextInput
+                    id = "fName"
                     placeholder ="First Name"
                     placeholderTextColor = "rgba(255,255,255,0.7)"
                     returnKeyType = "next"
@@ -29,7 +33,8 @@ class signUpScreen extends React.Component {
                     style ={styleSignUp.textInputs2}
                     />
 
-                    <TextInput 
+                    <TextInput
+                    id = "LName" 
                     placeholder = "Last Name"
                     placeholderTextColor = "rgba(255,255,255,0.7)"
                     returnKeyType = "next"
@@ -37,12 +42,11 @@ class signUpScreen extends React.Component {
                     style = {styleSignUp.textInputs2}
                     ref ={(input) => this.lastName = input}
                     />
-
                 </View>
     
                 <View style = {styleSignUp.signUpContainer}>
-
-                    <TextInput 
+                    <TextInput
+                    id = "emailing" 
                     placeholder = "E-Mail"
                     placeholderTextColor = "rgba(255,255,255,0.7)"
                     returnKeyType = "next"
@@ -70,16 +74,14 @@ class signUpScreen extends React.Component {
                     style = {styleSignUp.textInputs}
                     ref ={(input) => this.passwordInput = input}
                     />
+                </View>
 
-                    <TextInput 
-                    placeholder = "Type: Artist or Author"
-                    placeholderTextColor = "rgba(255,255,255,0.7)"
-                    returnKeyType = "next"
-                    style = {styleSignUp.textInputs}
-                    ref ={(input) => this.artistInput = input}
+                <ModalDropDown
+                    style = {styleSignUp.selectionType}
+                    Text = "Please Select a Type" 
+                    options = {['Artist', 'Author']}
                     />
 
-                </View>
             </View>
 
             <TouchableOpacity >
@@ -88,7 +90,7 @@ class signUpScreen extends React.Component {
                     textColor= "#000000"
                     backgroundColor= "#5ce1e6"
                     alignItems = "center"
-                    onPress = {() => this.props.navigation.navigate('Profile')}
+                    onPress = {() => this.props.navigation.navigate('Editprofile')}
                     >Register
             </AwesomeButton>
             </View>
@@ -140,6 +142,11 @@ const styleSignUp = StyleSheet.create({
         color: '#FFF',
         paddingHorizontal: 33.5,
         marginRight: 1
-    }
+    },
+    selectionType:{
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        marginBottom: 10,
+        paddingHorizontal: 62
+    },
      
 });

@@ -1,15 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from "react-native";
 import AwesomeButton from "react-native-really-awesome-button";
+import Image from "react-native-scalable-image";
 
-//building a class that includes the touchability to move forward to the next page for each button
+//built a class that includes the touchability to move forward to the next page for each button
 
 class WelcomeScreen extends React.Component {
     render(){
         return(
             <View style = {styleWelcome.container}>
                 <Text>Welcome To</Text>
-                <Image style = {{width: 300, height: 200}}
+                <Image
+                width = {Dimensions.get('window').width}
                 source = {require("./assets/xpression.png")}/>
                 <Text>Where Artists and Authors Unite</Text>
 
