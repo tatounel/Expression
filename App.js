@@ -33,7 +33,8 @@ const MainNavigator = createStackNavigator({
       title: `Edit Profile`,
       headerBackTitle: null,
     })},
-
+  
+  //ProfileDisplay: {screen: profileDisplayScreen},
 
 });
 

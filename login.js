@@ -5,6 +5,11 @@ import Image from "react-native-scalable-image";
 
 //Built a login that includes inputs of each placeholder needed to be filled out
 class loginScreen extends React.Component {
+    constructor(props){
+        super(props);
+        
+    }
+
     render(){
         return(
             <KeyboardAvoidingView behavior = "padding" style = {styleLogin.container}>

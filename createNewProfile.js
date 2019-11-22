@@ -46,7 +46,7 @@ export default class createProfileScreen extends React.Component{
                     <AwesomeButton
                     textColor= "#000000"
                     backgroundColor= "#5ce1e6"
-                    onPress = {() => this.props.navigation.navigate('')}
+                    onPress = {() => this.props.navigation.navigate('null')}
                     >See XPression
                     </AwesomeButton>
                     </View>
