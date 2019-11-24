@@ -28,7 +28,7 @@ class loginScreen extends React.Component {
 
           <View style={styleLogin.loginContainer}>
             <TextInput
-              placeholder="E-mail or Username"
+              placeholder="E-mail"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
               onSubmitEditing={() => this.passwordInput.focus()}

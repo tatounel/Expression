@@ -58,19 +58,10 @@ export default class signUpScreen extends React.Component {
               placeholder="E-Mail"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
-              onSubmitEditing={() => this.userName.focus()}
+              onSubmitEditing={() => this.passwordInput.focus()}
               keyboardType="email-address"
               style={styleSignUp.textInputs}
               ref={input => (this.eMail = input)}
-            />
-
-            <TextInput
-              placeholder="Username"
-              placeholderTextColor="rgba(255,255,255,0.7)"
-              returnKeyType="next"
-              onSubmitEditing={() => this.passwordInput.focus()}
-              style={styleSignUp.textInputs}
-              ref={input => (this.userName = input)}
             />
 
             <TextInput
@@ -92,6 +83,7 @@ export default class signUpScreen extends React.Component {
               height: 90,
               width: "100%"
             }}
+            ref={input => (this.artistInput = input)}
           />
         </View>
 
