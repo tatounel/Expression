@@ -24,7 +24,7 @@ export default class createProfileScreen extends React.Component {
             source={require("./assets/profile.png")}
           />
           <Image
-            width="200"
+            width={200}
             source={require("./assets/faceicon.png")}
             Text="Upload Your First Image"
           />
