@@ -1,11 +1,13 @@
 import React from "react";
+import AwesomeButton from "react-native-really-awesome-button";
 import {
   Text,
   View,
   StyleSheet,
   BackHandler,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  KeyboardAvoidingView
 } from "react-native";
 export default class profileDisplayScreen extends React.Component {
   //this is so You can't press back on the hardware for any device once you Login
@@ -30,7 +32,7 @@ export default class profileDisplayScreen extends React.Component {
           />
 
           <TouchableOpacity>
-            <View style={styleCreateProfile.editProfileButton}>
+            <View style={styleDisplayProfile.editProfileButton}>
               <AwesomeButton
                 textColor="#000000"
                 backgroundColor="#5ce1e6"

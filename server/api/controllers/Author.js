@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   let { user } = req.body;
-  console.log(user);
+  console.log(req.body);
   Author.create({ user })
     .then(author => {
       res.status(201).json(author);

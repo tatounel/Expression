@@ -23,12 +23,13 @@ export default class signUpScreen extends React.Component {
     firstName: "",
     lastName: "",
     email: "",
-    type: ""
+    type: "",
+    options: ["Artist", "Author"]
   };
 
   saveNewUser = event => {
     console.log(`Creating new ${this.state.type}`);
-    fetch(`/api/${this.state.type}s/`, {
+    fetch(`/api/authors/`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -79,6 +80,10 @@ export default class signUpScreen extends React.Component {
               autoCapitalize="none"
               autoCorrect={false}
               style={styleSignUp.textInputs2}
+              onChangeText={firstName =>
+                this.setState({ firstName: firstName })
+              }
+              value={this.state.firstName}
             />
 
             <TextInput
@@ -89,7 +94,7 @@ export default class signUpScreen extends React.Component {
               onSubmitEditing={() => this.eMail.focus()}
               style={styleSignUp.textInputs2}
               ref={input => (this.lastName = input)}
-              onChangeText={lastName => this.setState({ lastName })}
+              onChangeText={lastName => this.setState({ lastName: lastName })}
               value={this.state.lastName}
             />
           </View>
@@ -104,7 +109,7 @@ export default class signUpScreen extends React.Component {
               keyboardType="email-address"
               style={styleSignUp.textInputs}
               ref={input => (this.eMail = input)}
-              onChangeText={email => this.setState({ email })}
+              onChangeText={email => this.setState({ email: email })}
               value={this.state.email}
             />
 
@@ -122,12 +127,14 @@ export default class signUpScreen extends React.Component {
           <ModalDropDown
             style={styleSignUp.selectionType}
             Text="Select Type"
-            options={["Artist", "Author"]}
+            options={this.state.options}
             dropdownStyle={{
               height: 90,
               width: "30%"
             }}
-            onChangeText={type => this.setState({ type })}
+            onSelect={type =>
+              this.setState({ type: `${this.state.options[type]}` })
+            }
             value={this.state.type}
           />
         </View>
@@ -138,7 +145,10 @@ export default class signUpScreen extends React.Component {
               textColor="#000000"
               backgroundColor="#5ce1e6"
               alignItems="center"
-              onPress={() => this.props.navigation.navigate("EditProfile")}
+              onPress={() => {
+                this.saveNewUser();
+                this.props.navigation.navigate("EditProfile");
+              }}
             >
               Register
             </AwesomeButton>
