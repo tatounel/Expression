@@ -29,14 +29,14 @@ export default class signUpScreen extends React.Component {
 
   saveNewUser = event => {
     console.log(`Creating new ${this.state.type}`);
-    fetch(`/api/authors/`, {
+    fetch(`http://localhost:8000/api/${this.state.type}s/`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        name: `${this.state.firstName} + " " + ${this.state.lastName}`,
+        name: `${this.state.firstName}` + " " + `${this.state.lastName}`,
         email: `${this.state.email}`
       })
     })

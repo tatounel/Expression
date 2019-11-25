@@ -16,9 +16,9 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  let { content } = req.body;
+  let data = req.body;
 
-  Match.create({ content })
+  Match.create(data)
     .then(match => {
       res.status(201).json(match);
     })
@@ -45,7 +45,10 @@ router.put("/:id", (req, res) => {
       return res.sendStatus(404);
     }
 
-    match.content = req.body.content;
+    Object.keys(req.body).forEach(function(key) {
+      console.log(key, req.body[key]);
+      match[key] = req.body[key];
+    });
     match
       .save()
       .then(match => {

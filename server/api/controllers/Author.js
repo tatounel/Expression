@@ -16,9 +16,10 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  let { user } = req.body;
-  console.log(req.body);
-  Author.create({ user })
+  const user = req.body;
+  console.log(user);
+  console.log({ user });
+  Author.create(user)
     .then(author => {
       res.status(201).json(author);
       console.log(author);
@@ -45,8 +46,10 @@ router.put("/:id", (req, res) => {
     if (!author) {
       return res.sendStatus(404);
     }
-
-    author.user = req.body.user;
+    Object.keys(req.body).forEach(function(key) {
+      console.log(key, req.body[key]);
+      author[key] = req.body[key];
+    });
     author
       .save()
       .then(author => {

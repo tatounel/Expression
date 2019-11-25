@@ -16,9 +16,9 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  let { content } = req.body;
+  const data = req.body;
 
-  Genre.create({ content })
+  Genre.create(data)
     .then(genre => {
       res.status(201).json(genre);
     })
@@ -45,7 +45,10 @@ router.put("/:id", (req, res) => {
       return res.sendStatus(404);
     }
 
-    genre.content = req.body.content;
+    Object.keys(req.body).forEach(function(key) {
+      console.log(key, req.body[key]);
+      genre[key] = req.body[key];
+    });
     genre
       .save()
       .then(genre => {

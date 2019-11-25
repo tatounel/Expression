@@ -16,9 +16,9 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  let { content } = req.body;
+  let data = req.body;
 
-  Portfolio.create({ content })
+  Portfolio.create(data)
     .then(portfolio => {
       res.status(201).json(portfolio);
     })
@@ -45,7 +45,10 @@ router.put("/:id", (req, res) => {
       return res.sendStatus(404);
     }
 
-    portfolio.content = req.body.content;
+    Object.keys(req.body).forEach(function(key) {
+      console.log(key, req.body[key]);
+      portfolio[key] = req.body[key];
+    });
     portfolio
       .save()
       .then(portfolio => {
