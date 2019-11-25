@@ -16,9 +16,9 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  let { content } = req.body;
+  const user = req.body;
 
-  Artist.create({ content })
+  Artist.create(user)
     .then(artist => {
       res.status(201).json(artist);
     })
@@ -44,8 +44,10 @@ router.put("/:id", (req, res) => {
     if (!artist) {
       return res.sendStatus(404);
     }
-
-    artist.content = req.body.content;
+    Object.keys(req.body).forEach(function(key) {
+      console.log(key, req.body[key]);
+      artist[key] = req.body[key];
+    });
     artist
       .save()
       .then(artist => {

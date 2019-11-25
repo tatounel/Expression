@@ -16,9 +16,9 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  let { content } = req.body;
+  let data = req.body;
 
-  Style.create({ content })
+  Style.create(data)
     .then(style => {
       res.status(201).json(style);
     })
@@ -45,7 +45,10 @@ router.put("/:id", (req, res) => {
       return res.sendStatus(404);
     }
 
-    style.content = req.body.content;
+    Object.keys(req.body).forEach(function(key) {
+      console.log(key, req.body[key]);
+      style[key] = req.body[key];
+    });
     style
       .save()
       .then(style => {
