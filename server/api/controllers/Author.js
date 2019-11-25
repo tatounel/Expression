@@ -16,11 +16,12 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  let { content } = req.body;
-
-  Author.create({ content })
+  let { user } = req.body;
+  console.log(user);
+  Author.create({ user })
     .then(author => {
       res.status(201).json(author);
+      console.log(author);
     })
     .catch(err => {
       res.status(400).json(err);
@@ -45,7 +46,7 @@ router.put("/:id", (req, res) => {
       return res.sendStatus(404);
     }
 
-    author.content = req.body.content;
+    author.user = req.body.user;
     author
       .save()
       .then(author => {
