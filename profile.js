@@ -23,13 +23,12 @@ export default class createProfileScreen extends React.Component {
             width={Dimensions.get("window").width}
             source={require("./assets/profile.png")}
           />
-
           <Image
-            width={Dimensions.get("window").width}
-            source={require("./assets/profile.png")}
-          >
-            Upload Your First Image
-          </Image>
+            width="200"
+            source={require("./assets/faceicon.png")}
+            Text="Upload Your First Image"
+          />
+
           <View style={styleCreateProfile.textContainer}>
             <TextInput
               placeholder="Genre/Style"
@@ -65,7 +64,7 @@ export default class createProfileScreen extends React.Component {
                 backgroundColor="#5ce1e6"
                 onPress={() => this.props.navigation.navigate("DisplayProfile")}
               >
-                See XPression
+                Next
               </AwesomeButton>
             </View>
           </TouchableOpacity>

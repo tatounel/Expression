@@ -68,7 +68,6 @@ export default class signUpScreen extends React.Component {
               placeholder="Password"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
-              onSubmitEditing={() => this.artistInput.focus()}
               secureTextEntry
               style={styleSignUp.textInputs}
               ref={input => (this.passwordInput = input)}
@@ -81,9 +80,8 @@ export default class signUpScreen extends React.Component {
             options={["Artist", "Author"]}
             dropdownStyle={{
               height: 90,
-              width: "100%"
+              width: "30%"
             }}
-            ref={input => (this.artistInput = input)}
           />
         </View>
 

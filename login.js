@@ -50,7 +50,7 @@ class loginScreen extends React.Component {
           <AwesomeButton
             textColor="#000000"
             backgroundColor="#5ce1e6"
-            onPress={() => this.props.navigation.navigate("ProfileDisplay")}
+            onPress={() => this.props.navigation.navigate("DisplayProfile")}
           >
             Login
           </AwesomeButton>
@@ -79,6 +79,6 @@ const styleLogin = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 20,
     color: "#FFF",
-    paddingHorizontal: 10
+    paddingHorizontal: 50
   }
 });
