@@ -16,7 +16,7 @@ import ModalDropDown from "react-native-modal-dropdown";
 //Built a signup screen that includes text inputs of each placeholder. with no auto Cap and no auto correcting. Making sure everytime
 //you finish one part, it move onto the next one with the "next() or arrow" button depending on which device you have
 
-class signUpScreen extends React.Component {
+export default class signUpScreen extends React.Component {
   state = {
     error: false,
     successs: false,
@@ -83,11 +83,6 @@ class signUpScreen extends React.Component {
 
             <TextInput
               id="LName"
-              onChangeText={firstName => this.setState({ firstName })}
-              value={this.state.firstName}
-            />
-
-            <TextInput
               placeholder="Last Name"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
@@ -111,15 +106,6 @@ class signUpScreen extends React.Component {
               ref={input => (this.eMail = input)}
               onChangeText={email => this.setState({ email })}
               value={this.state.email}
-            />
-
-            <TextInput
-              placeholder="Username"
-              placeholderTextColor="rgba(255,255,255,0.7)"
-              returnKeyType="next"
-              onSubmitEditing={() => this.passwordInput.focus()}
-              style={styleSignUp.textInputs}
-              ref={input => (this.userName = input)}
             />
 
             <TextInput
