@@ -1,2 +1,6 @@
-
+package-lock.json
 node_modules
+yarn.lock
+db/yarn.lock
+yarn-error.log
+.expo/packager-info.json

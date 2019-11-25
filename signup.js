@@ -17,6 +17,46 @@ import ModalDropDown from "react-native-modal-dropdown";
 //you finish one part, it move onto the next one with the "next() or arrow" button depending on which device you have
 
 export default class signUpScreen extends React.Component {
+  state = {
+    error: false,
+    successs: false,
+    firstName: "",
+    lastName: "",
+    email: "",
+    type: ""
+  };
+
+  saveNewUser = event => {
+    console.log(`Creating new ${this.state.type}`);
+    fetch(`/api/${this.state.type}s/`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: `${this.state.firstName} + " " + ${this.state.lastName}`,
+        email: `${this.state.email}`
+      })
+    })
+      .then(res => {
+        console.log(`Created new ${this.state.type}`);
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("Content validation");
+      })
+      .then(artist => {
+        this.setState({
+          success: true
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: true
+        });
+      });
+  };
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styleSignUp.container}>
@@ -49,6 +89,8 @@ export default class signUpScreen extends React.Component {
               onSubmitEditing={() => this.eMail.focus()}
               style={styleSignUp.textInputs2}
               ref={input => (this.lastName = input)}
+              onChangeText={lastName => this.setState({ lastName })}
+              value={this.state.lastName}
             />
           </View>
 
@@ -62,12 +104,15 @@ export default class signUpScreen extends React.Component {
               keyboardType="email-address"
               style={styleSignUp.textInputs}
               ref={input => (this.eMail = input)}
+              onChangeText={email => this.setState({ email })}
+              value={this.state.email}
             />
 
             <TextInput
               placeholder="Password"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
+              onSubmitEditing={() => this.artistInput.focus()}
               secureTextEntry
               style={styleSignUp.textInputs}
               ref={input => (this.passwordInput = input)}
@@ -82,6 +127,8 @@ export default class signUpScreen extends React.Component {
               height: 90,
               width: "30%"
             }}
+            onChangeText={type => this.setState({ type })}
+            value={this.state.type}
           />
         </View>
 
