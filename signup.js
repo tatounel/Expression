@@ -17,6 +17,47 @@ import ModalDropDown from "react-native-modal-dropdown";
 //you finish one part, it move onto the next one with the "next() or arrow" button depending on which device you have
 
 export default class signUpScreen extends React.Component {
+  state = {
+    error: false,
+    successs: false,
+    firstName: "",
+    lastName: "",
+    email: "",
+    type: "",
+    options: ["Artist", "Author"]
+  };
+
+  saveNewUser = event => {
+    console.log(`Creating new ${this.state.type}`);
+    fetch(`http://localhost:8000/api/${this.state.type}s/`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: `${this.state.firstName}` + " " + `${this.state.lastName}`,
+        email: `${this.state.email}`
+      })
+    })
+      .then(res => {
+        console.log(`Created new ${this.state.type}`);
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("Content validation");
+      })
+      .then(artist => {
+        this.setState({
+          success: true
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: true
+        });
+      });
+  };
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styleSignUp.container}>
@@ -39,6 +80,10 @@ export default class signUpScreen extends React.Component {
               autoCapitalize="none"
               autoCorrect={false}
               style={styleSignUp.textInputs2}
+              onChangeText={firstName =>
+                this.setState({ firstName: firstName })
+              }
+              value={this.state.firstName}
             />
 
             <TextInput
@@ -49,6 +94,8 @@ export default class signUpScreen extends React.Component {
               onSubmitEditing={() => this.eMail.focus()}
               style={styleSignUp.textInputs2}
               ref={input => (this.lastName = input)}
+              onChangeText={lastName => this.setState({ lastName: lastName })}
+              value={this.state.lastName}
             />
           </View>
 
@@ -62,6 +109,8 @@ export default class signUpScreen extends React.Component {
               keyboardType="email-address"
               style={styleSignUp.textInputs}
               ref={input => (this.eMail = input)}
+              onChangeText={email => this.setState({ email: email })}
+              value={this.state.email}
             />
 
             <TextInput
@@ -77,11 +126,15 @@ export default class signUpScreen extends React.Component {
           <ModalDropDown
             style={styleSignUp.selectionType}
             Text="Select Type"
-            options={["Artist", "Author"]}
+            options={this.state.options}
             dropdownStyle={{
               height: 90,
               width: "30%"
             }}
+            onSelect={type =>
+              this.setState({ type: `${this.state.options[type]}` })
+            }
+            value={this.state.type}
           />
         </View>
 
@@ -91,7 +144,10 @@ export default class signUpScreen extends React.Component {
               textColor="#000000"
               backgroundColor="#5ce1e6"
               alignItems="center"
-              onPress={() => this.props.navigation.navigate("EditProfile")}
+              onPress={() => {
+                this.saveNewUser();
+                this.props.navigation.navigate("EditProfile");
+              }}
             >
               Register
             </AwesomeButton>
