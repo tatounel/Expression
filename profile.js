@@ -22,6 +22,7 @@ export default class createProfileScreen extends React.Component {
             width={Dimensions.get("window").width}
             source={require("./assets/profile.png")}
           />
+
           <Image
             width={200}
             source={require("./assets/faceicon.png")}

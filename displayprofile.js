@@ -45,7 +45,7 @@ export default class profileDisplayScreen extends React.Component {
               <AwesomeButton
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
-                onPress={() => this.props.navigation.navigate("AuthorContent")}
+                onPress={() => this.props.navigation.navigate("ArtistContent")}
               >
                 Find A Match
               </AwesomeButton>

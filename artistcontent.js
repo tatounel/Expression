@@ -7,9 +7,26 @@ import {
   Dimensions,
   TouchableOpacity
 } from "react-native";
+import ImagePicker from "react-native-image-picker";
 import Image from "react-native-scalable-image";
 
 export default class artistContentScreen extends React.Component {
+  state = {
+    photo: null
+  };
+
+  handleChoosePhoto = () => {
+    const options = {
+      noData: true
+    };
+
+    ImagePicker.launchImageLibrary(options, response => {
+      if (response.uri) {
+        this.setState({ photo: response });
+      }
+    });
+  };
+
   render() {
     return (
       <View style={styleArtist.container}>
@@ -20,48 +37,59 @@ export default class artistContentScreen extends React.Component {
           />
           <View style={styleArtist.imgContentPosition}>
             <View style={styleArtist.imgContentPositionColumn}>
-              <Image
-                width={100}
-                height={100}
-                source={require("./assets/placeholder-image.png")}
-              />
-              <Image
-                width={100}
-                height={100}
-                source={require("./assets/placeholder-image.png")}
-              />
-              <Image
-                width={100}
-                height={100}
-                source={require("./assets/placeholder-image.png")}
-              />
+              {photo && (
+                <Image
+                  width={100}
+                  height={100}
+                  source={require("./assets/placeholder-image.png")}
+                />
+              )}
+              {photo && (
+                <Image
+                  width={100}
+                  height={100}
+                  source={require("./assets/placeholder-image.png")}
+                />
+              )}
+              {photo && (
+                <Image
+                  width={100}
+                  height={100}
+                  source={require("./assets/placeholder-image.png")}
+                />
+              )}
             </View>
             <View style={styleArtist.imgContentPositionColumn}>
-              <Image
-                width={100}
-                height={100}
-                source={require("./assets/placeholder-image.png")}
-              />
-              <Image
-                width={100}
-                height={100}
-                source={require("./assets/placeholder-image.png")}
-              />
-              <Image
-                width={100}
-                height={100}
-                source={require("./assets/placeholder-image.png")}
-              />
+              {photo && (
+                <Image
+                  width={100}
+                  height={100}
+                  source={require("./assets/placeholder-image.png")}
+                />
+              )}
+              {photo && (
+                <Image
+                  width={100}
+                  height={100}
+                  source={require("./assets/placeholder-image.png")}
+                />
+              )}
+              {photo && (
+                <Image
+                  width={100}
+                  height={100}
+                  source={require("./assets/placeholder-image.png")}
+                />
+              )}
             </View>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={this.handleChoosePhoto}>
             <AwesomeButton
+              title="Add New"
               textColor="#000000"
               backgroundColor="#5ce1e6"
-              onPress={() => this.props.navigation.navigate("null")}
-            >
-              Add New
-            </AwesomeButton>
+              onPress={this.handleChoosePhoto}
+            />
           </TouchableOpacity>
         </ScrollView>
       </View>

@@ -26,11 +26,13 @@ export default class authorContentScreen extends React.Component {
               height={200}
               source={require("./assets/placeholder-book.png")}
             />
+
             <Image
               width={200}
               height={200}
               source={require("./assets/placeholder-book.png")}
             />
+
             <Image
               width={200}
               height={200}

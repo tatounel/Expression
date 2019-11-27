@@ -6,6 +6,8 @@ import loginScreen from "./login";
 import signUpScreen from "./signup";
 import createProfileScreen from "./profile";
 import profileDisplayScreen from "./displayprofile";
+import artistContentScreen from "./artistcontent";
+import authorContentScreen from "./authorcontent";
 //Calling in the files for it to stack and work as a moving screen
 
 const MainNavigator = createStackNavigator({
@@ -45,11 +47,23 @@ const MainNavigator = createStackNavigator({
       headerBackTitle: null,
       headerLeft: null
     })
+  },
+
+  ArtistContent: {
+    screen: artistContentScreen,
+    navigationOptions: () => ({
+      title: `Artist`,
+      headerBackTitle: null
+    })
+  },
+
+  AuthorContent: {
+    screen: authorContentScreen,
+    navigationOptions: () => ({
+      title: `Author`,
+      headerBackTitle: null
+    })
   }
-
-  //ArtistContent: {screen: artistContentScreen},
-
-  //AuthorContent: {screen: authorContentScreen}
 });
 
 const AppContainer = createAppContainer(MainNavigator);
