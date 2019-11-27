@@ -12,7 +12,6 @@ import AwesomeButton from "react-native-really-awesome-button";
 import Image from "react-native-scalable-image";
 
 //Built a login that includes inputs of each placeholder needed to be filled out
-
 class loginScreen extends React.Component {
   render() {
     return (
@@ -20,10 +19,12 @@ class loginScreen extends React.Component {
         <View style={styleLogin.container}>
           <StatusBar barStyle="light-content" />
           <Text>Welcome To</Text>
+
           <Image
             width={Dimensions.get("window").width}
             source={require("./assets/xpression.png")}
           />
+
           <Text>Where Artists and Authors Unite</Text>
 
           <View style={styleLogin.loginContainer}>
