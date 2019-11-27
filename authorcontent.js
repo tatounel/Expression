@@ -5,8 +5,7 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  TouchableOpacity,
-  BackHandler
+  TouchableOpacity
 } from "react-native";
 import Image from "react-native-scalable-image";
 
