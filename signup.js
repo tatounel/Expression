@@ -117,6 +117,7 @@ export default class signUpScreen extends React.Component {
               placeholder="Password"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
+              onSubmitEditing={() => this.artistInput.focus()}
               secureTextEntry
               style={styleSignUp.textInputs}
               ref={input => (this.passwordInput = input)}
