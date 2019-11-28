@@ -1,7 +1,13 @@
 import React from "react";
 import AwesomeButton from "react-native-really-awesome-button";
 import Image from "react-native-scalable-image";
-import { StyleSheet, View, Dimensions, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  ScrollView
+} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
@@ -17,11 +23,13 @@ export default class artistContentScreen extends React.Component {
           width={Dimensions.get("window").width}
           source={require("./assets/xpress.png")}
         />
-        <View style={styleArtist.imgContentPositionColumn}>
-          <View style={styleArtist.imgContentPosition}>
-            {this._renderImages()}
+        <ScrollView>
+          <View style={styleArtist.imgContentPositionColumn}>
+            <View style={styleArtist.imgContentPosition}>
+              {this._renderImages()}
+            </View>
           </View>
-        </View>
+        </ScrollView>
 
         <TouchableOpacity>
           <AwesomeButton
