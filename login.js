@@ -80,6 +80,7 @@ const styleLogin = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 20,
     color: "#FFF",
-    paddingHorizontal: 50
+    paddingHorizontal: 50,
+    borderWidth: 1
   }
 });

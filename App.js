@@ -8,6 +8,7 @@ import createProfileScreen from "./profile";
 import profileDisplayScreen from "./displayprofile";
 import artistContentScreen from "./artistcontent";
 import authorContentScreen from "./authorcontent";
+import writingContentScreen from "./writingcontent";
 //Calling in the files for it to stack and work as a moving screen
 
 const MainNavigator = createStackNavigator({
@@ -61,6 +62,13 @@ const MainNavigator = createStackNavigator({
     screen: authorContentScreen,
     navigationOptions: () => ({
       title: `Author`,
+      headerBackTitle: null
+    })
+  },
+  WritingContent: {
+    screen: writingContentScreen,
+    navigationOptions: () => ({
+      title: `Edit Content`,
       headerBackTitle: null
     })
   }

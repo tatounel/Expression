@@ -8,6 +8,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import Image from "react-native-scalable-image";
+import RichTextEditor from "react-native-zss-rich-text-editor";
 
 export default class authorContentScreen extends React.Component {
   render() {
@@ -19,30 +20,12 @@ export default class authorContentScreen extends React.Component {
             source={require("./assets/xpress.png")}
           />
 
-          <View style={styleAuthor.storyContentPosition}>
-            <Image
-              width={200}
-              height={200}
-              source={require("./assets/placeholder-book.png")}
-            />
-
-            <Image
-              width={200}
-              height={200}
-              source={require("./assets/placeholder-book.png")}
-            />
-
-            <Image
-              width={200}
-              height={200}
-              source={require("./assets/placeholder-book.png")}
-            />
-          </View>
+          <View style={styleAuthor.storyContentPosition}></View>
           <TouchableOpacity>
             <AwesomeButton
               textColor="#000000"
               backgroundColor="#5ce1e6"
-              onPress={() => this.props.navigation.navigate("null")}
+              onPress={() => this.props.navigation.navigate("WritingContent")}
             >
               Add New
             </AwesomeButton>

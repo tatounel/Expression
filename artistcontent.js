@@ -16,6 +16,7 @@ export default class artistContentScreen extends React.Component {
   state = {
     photo: []
   };
+
   render() {
     return (
       <View style={styleArtist.Container}>
@@ -73,6 +74,7 @@ export default class artistContentScreen extends React.Component {
     });
     return photos;
   }
+
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
