@@ -1,47 +1,65 @@
-import React from 'react';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import WelcomeScreen from './welcome.js';
-import loginScreen from './login';
-import signUpScreen from './signup';
-import profileScreen from './profile';
+import React from "react";
+// import { createAppContainer, createSwitchNavigator } from "react-navigation";
+// import { createStackNavigator } from "react-navigation-stack";
 
-//Calling in the files for it to stack and work as a moving screen
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { creatStackNavigator, createStackNavigator } from "react-navigation-stack";
 
-const MainNavigator = createStackNavigator({
-  Welcome: {screen: WelcomeScreen,
-    navigationOptions: () => ({
-    title: `Welcome`,
-    headerBackTitle: null,
-  })
-},
-  Login: {screen: loginScreen,
-    navigationOptions: () => ({
-    title: `Login Page`,
-    headerBackTitle: null,
-    })
-  },
-  Signup: {screen: signUpScreen,
-    navigationOptions: () => ({
-    title: `Sign Up Page`,
-    headerBackTitle: null,
-    })},
+import WelcomeScreen from "./welcome.js";
+import loginScreen from "./login";
+import signUpScreen from "./signup";
+import createProfileScreen from "./profile";
+import profileDisplayScreen from "./displayprofile";
+import artistContentScreen from "./artistcontent";
+import authorContentScreen from "./authorcontent";
 
-  Profile: {screen: profileScreen,
-    navigationOptions: () => ({
-      title: `Edit Profile`,
-      headerBackTitle: null,
-    })},
+// import AuthLoadingScreen from "./chatScreens/AuthLoadingScreen";
+import chatScreen from "./chatScreens/chatScreen";
+import ProfileScreen from "./chatScreens/ProfileScreen";
 
-  //ArtistContent: {screen: artistContentScreen},
+import LoadingScreen from "./chatScreens/LoadingScreen";
+import * as firebase from 'firebase';
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyC-0GWVdziaKE2oKpEFG4GuByJ-ncyfFo4",
+    authDomain: "xpression-83251.firebaseapp.com",
+    databaseURL: "https://xpression-83251.firebaseio.com",
+    projectId: "xpression-83251",
+    storageBucket: "xpression-83251.appspot.com",
+    messagingSenderId: "930392001728",
+    appId: "1:930392001728:web:8038f5b123ce1d48b1b125",
+    measurementId: "G-MN8017QVQZ"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
-  //AuthorContent: {screen: authorContentScreen}
+
+const AppStack = createStackNavigator({
+  //FIRST PAGE HERE IS THE PAGE YOU SEE AFTER SIGNUP
+  Profile: ProfileScreen,
+  EditProfile: createProfileScreen,
+  //GOES HERE WHEN YOU LOGIN
+  DisplayProfile: profileDisplayScreen,
+  ArtistContent: artistContentScreen,
+  AuthorContent: authorContentScreen,
+  Chat: chatScreen,
+});
+const AuthStack = createStackNavigator({
+  Welcome: WelcomeScreen,
+  Login: loginScreen,
+  Signup: signUpScreen,
 });
 
-const AppContainer = createAppContainer(MainNavigator);
-
-export default class App extends React.Component{
-  render(){
-    return <AppContainer/>;
-  }
-}
+export default createAppContainer(
+  createSwitchNavigator({
+    // AuthLoading: AuthLoadingScreen,
+    Loading: LoadingScreen,
+    App: AppStack,
+    Auth: AuthStack,
+    },
+    {
+      // initialRouteName: 'AuthLoading',
+      initialRouteName: "Loading",
+    }
+  )
+);
