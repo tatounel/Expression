@@ -22,14 +22,14 @@ import LoadingScreen from "./chatScreens/LoadingScreen";
 import * as firebase from 'firebase';
   // Your web app's Firebase configuration
   var firebaseConfig = {
-    apiKey: "AIzaSyC-0GWVdziaKE2oKpEFG4GuByJ-ncyfFo4",
-    authDomain: "xpression-83251.firebaseapp.com",
-    databaseURL: "https://xpression-83251.firebaseio.com",
-    projectId: "xpression-83251",
-    storageBucket: "xpression-83251.appspot.com",
-    messagingSenderId: "930392001728",
-    appId: "1:930392001728:web:8038f5b123ce1d48b1b125",
-    measurementId: "G-MN8017QVQZ"
+    apiKey: "AIzaSyAO19aZCQkjfLSIuMdLx1hiLcaLTrioVQ0",
+    authDomain: "expression-266df.firebaseapp.com",
+    databaseURL: "https://expression-266df.firebaseio.com",
+    projectId: "expression-266df",
+    storageBucket: "expression-266df.appspot.com",
+    messagingSenderId: "775498698408",
+    appId: "1:775498698408:web:9232c6f6778146cd557c9d",
+    measurementId: "G-0RCR4RTM7L"
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
