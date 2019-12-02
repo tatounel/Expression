@@ -68,6 +68,21 @@ class signUpScreen extends React.Component {
   //     });
   // };
 
+  //authentication tutorial from web
+  // SignUp = (email, password) => {
+  //   try {
+  //     firebase
+  //         .auth()
+  //         .createUserWithEmailAndPassword(email, password)
+  //         .then(user => { 
+  //                console.log(user);
+  //          });
+  //   } catch (error) {
+  //     console.log(error.toString(error));
+  //   }
+  // };
+
+  /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
   handleSignUp = () => {
     firebase
         .auth()

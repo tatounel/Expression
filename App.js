@@ -18,6 +18,7 @@ import chatScreen from "./chatScreens/chatScreen";
 import ProfileScreen from "./chatScreens/ProfileScreen";
 
 import LoadingScreen from "./chatScreens/LoadingScreen";
+/* YT authentication tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
 import * as firebase from 'firebase';
   // Your web app's Firebase configuration
   var firebaseConfig = {
