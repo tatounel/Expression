@@ -1,35 +1,37 @@
 import React from "react";
 import AwesomeButton from "react-native-really-awesome-button";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  TextInput,
-  TouchableOpacity,
-  KeyboardAvoidingView
-} from "react-native";
+import { StyleSheet, View, Text,
+        Dimensions, TextInput,
+        TouchableOpacity, 
+        KeyboardAvoidingView  } from "react-native";
 import Image from "react-native-scalable-image";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
+
 import Constants from "expo-constants";
 
 export default class createProfileScreen extends React.Component {
+  //For Top Page Details
+  static navigationOptions = ({ navigation }) => {
+    return{ 
+      title: 'Create Profile',
+    }
+  }
+
   state = {
     photo: null
   };
+  
   render() {
     let { photo } = this.state;
     return (
       <KeyboardAvoidingView
         behavior="padding"
-        style={styleCreateProfile.container}
-      >
+        style={styleCreateProfile.container} >
         <View style={styleCreateProfile.container}>
           <Image
             width={Dimensions.get("window").width}
-            source={require("./assets/profile.png")}
-          />
+            source={require("./assets/profile.png")} />
           <TouchableOpacity onPress={this._pickImage}>
             <View>
               {photo && (
@@ -54,6 +56,7 @@ export default class createProfileScreen extends React.Component {
               onSubmitEditing={() => this.interestInput.focus()}
               style={styleCreateProfile.textProfileInputs}
             />
+
 
             <TextInput
               placeholder="Interest"
@@ -89,6 +92,7 @@ export default class createProfileScreen extends React.Component {
       </KeyboardAvoidingView>
     );
   }
+
   componentDidMount() {
     this.getPermissionAsync();
     console.log("hi");
@@ -102,6 +106,7 @@ export default class createProfileScreen extends React.Component {
       }
     }
   };
+  
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -116,6 +121,7 @@ export default class createProfileScreen extends React.Component {
       this.setState({ photo: result.uri });
     }
   };
+
 }
 
 const styleCreateProfile = StyleSheet.create({
@@ -147,4 +153,5 @@ const styleCreateProfile = StyleSheet.create({
     color: "#FFF",
     alignItems: "center"
   }
+
 });

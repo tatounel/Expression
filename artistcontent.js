@@ -1,15 +1,16 @@
 import React from "react";
 import AwesomeButton from "react-native-really-awesome-button";
-import Image from "react-native-scalable-image";
 import { StyleSheet, View, Dimensions, TouchableOpacity } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
+import Image from "react-native-scalable-image";
 
 export default class artistContentScreen extends React.Component {
   state = {
     photo: []
   };
+
   render() {
     return (
       <View style={styleArtist.Container}>
@@ -38,7 +39,7 @@ export default class artistContentScreen extends React.Component {
 
   componentDidMount() {
     this.getPermissionAsync();
-    console.log("hi");
+    console.log("Hi!");
   }
 
   getPermissionAsync = async () => {
@@ -65,6 +66,7 @@ export default class artistContentScreen extends React.Component {
     });
     return photos;
   }
+
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -98,4 +100,5 @@ const styleArtist = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around"
   }
+
 });

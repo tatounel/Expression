@@ -29,6 +29,7 @@ export default class authorContentScreen extends React.Component {
             <Image
               width={200}
               height={200}
+              source={require("./assets/placeholder-book.png")} />
               source={require("./assets/placeholder-book.png")}
             />
 
@@ -66,4 +67,5 @@ const styleAuthor = StyleSheet.create({
     flexBasis: 100,
     justifyContent: "space-around"
   }
+
 });
