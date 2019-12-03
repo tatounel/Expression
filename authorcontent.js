@@ -5,8 +5,7 @@ import {
   StyleSheet,
   View,
   Dimensions,
-  TouchableOpacity,
-  BackHandler
+  TouchableOpacity
 } from "react-native";
 import Image from "react-native-scalable-image";
 
@@ -30,6 +29,7 @@ export default class authorContentScreen extends React.Component {
             <Image
               width={200}
               height={200}
+              source={require("./assets/placeholder-book.png")} />
               source={require("./assets/placeholder-book.png")}
             />
 
@@ -67,4 +67,5 @@ const styleAuthor = StyleSheet.create({
     flexBasis: 100,
     justifyContent: "space-around"
   }
+
 });

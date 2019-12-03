@@ -14,8 +14,7 @@ Please do the following:
 -react@{{version}}: select 0.16.11 (latest version)
 -npm i react-native-modal-dropdown -save
 -Please download datagrip for software and select postgresSQL as a database and enter the infomation under the server/api/config/config.json
--yarn add react-native-image-picker
--npm install react-native-image-picker --save
+-expo install expo-image-picker
 
 #Mac User Installation Guide:
 
