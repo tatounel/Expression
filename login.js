@@ -30,15 +30,7 @@ class loginScreen extends React.Component {
     handleChange = key => val => {
       this.setState({ [key] : val})
     }
-  
-    // componentWillMount(){
-    //   AsyncStorage.getItem('userEmail').then(val => {
-    //     if(val){
-    //       this.setState({ email : val })
-    //     }
-    //   })
-    // }
-  
+    
     submitForm = async() => {
       if(this.state.email.length < 3){
         Alert.alert('Error', 'Wrong Email Address')
@@ -51,22 +43,7 @@ class loginScreen extends React.Component {
         this.props.nagivation.navigate('App');
       }
     }  
-
-  //authentication tutorial from web
-  // Login = (email, password) => {
-  //   try {
-  //     firebase
-  //        .auth()
-  //        .signInWithEmailAndPassword(email, password)
-  //        .then(res => {
-  //            console.log(res.user.email);
-  //     });
-  //   } catch (error) {
-  //     console.log(error.toString(error));
-  //   }
-  // };
-
-  /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
+    
   handleLogin = () => {
     const { email, password } = this.state;
     firebase
