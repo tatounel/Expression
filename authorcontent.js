@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   View,
+  Text,
   Dimensions,
   TouchableOpacity
 } from "react-native";
@@ -25,14 +26,11 @@ export default class authorContentScreen extends React.Component {
               height={200}
               source={require("./assets/placeholder-book.png")}
             />
-
             <Image
               width={200}
               height={200}
-              source={require("./assets/placeholder-book.png")} />
               source={require("./assets/placeholder-book.png")}
             />
-
             <Image
               width={200}
               height={200}
@@ -45,7 +43,7 @@ export default class authorContentScreen extends React.Component {
               backgroundColor="#5ce1e6"
               onPress={() => this.props.navigation.navigate("null")}
             >
-              Add New
+              <Text>Add New</Text>
             </AwesomeButton>
           </TouchableOpacity>
         </ScrollView>
@@ -67,5 +65,4 @@ const styleAuthor = StyleSheet.create({
     flexBasis: 100,
     justifyContent: "space-around"
   }
-
 });
