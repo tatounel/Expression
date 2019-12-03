@@ -13,8 +13,7 @@ export default class ProfileScreen extends React.Component {
           title: 'Chat_Profile',
         }
       }
-      
-  /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
+    
     state = {
         emal:"",
         password: "",
