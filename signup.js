@@ -68,7 +68,7 @@ export default class signUpScreen extends React.Component {
   //     });
   // };
 
-  //authentication tutorial from web
+  //authentication vr 0
   // SignUp = (email, password) => {
   //   try {
   //     firebase
@@ -81,8 +81,6 @@ export default class signUpScreen extends React.Component {
   //     console.log(error.toString(error));
   //   }
   // };
-
-  /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
   handleSignUp = () => {
     firebase
         .auth()
