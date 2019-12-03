@@ -141,53 +141,89 @@ const STYLES = [
 ];
 
 const MATCHES = [
-  { artistId: 1, authorId: 1 },
-  { artistId: 2, authorId: 2 },
-  { artistId: 3, authorId: 3 }
+  { id: 1, artistId: 1, authorId: 1 },
+  { id: 2, artistId: 2, authorId: 2 },
+  { id: 3, artistId: 3, authorId: 3 }
 ];
 
 (function seed() {
-  return db.sequelize.sync({ force: true }).then(() => {
-    // Create all the entries
-    let artistPromises = ARTISTS.map(a1 =>
-      Artist.create(a1).catch(Sequelize.ValidationError, function(err) {
-        console.log(err);
-      })
-    );
-    let authorPromises = AUTHORS.map(a2 =>
-      Author.create(a2).catch(Sequelize.ValidationError, function(err) {
-        console.log(err);
-      })
-    );
-    let contentPromises = CONTENTS.map(c => Content.create(c));
-    let genrePromises = GENRES.map(g => Genre.create(g));
-    let matchPromises = MATCHES.map(m => Match.create(m));
-    let portfolioPromises = PORTFOLIOS.map(p => Portfolio.create(p));
-    let stylePromises = STYLES.map(s => Style.create(s));
+  return db.sequelize
+    .sync({ force: true })
+    .then(() => {
+      // Create all the entries
+      let artistPromises = ARTISTS.map(a1 =>
+        Artist.create(a1).catch(Sequelize.ValidationError, function(err) {
+          console.log(err);
+        })
+      );
+      let authorPromises = AUTHORS.map(a2 =>
+        Author.create(a2).catch(Sequelize.ValidationError, function(err) {
+          console.log(err);
+        })
+      );
+      let contentPromises = CONTENTS.map(c => Content.create(c));
+      let genrePromises = GENRES.map(g => Genre.create(g));
+      let matchPromises = MATCHES.map(m => Match.create(m));
+      let portfolioPromises = PORTFOLIOS.map(p => Portfolio.create(p));
+      let stylePromises = STYLES.map(s => Style.create(s));
 
-    return Promise.all([
-      ...artistPromises,
-      ...authorPromises,
-      ...contentPromises,
-      ...genrePromises,
-      ...matchPromises,
-      ...portfolioPromises,
-      ...stylePromises
-    ]);
-  });
-  //.then(() => {
-  // Create the associations
-  //   let associationPromises = MOVIES_ACTORS.map(ma => {
-  //     let moviePromise = Movie.findByPk(ma.movieId);
-  //     let actorPromise = Actor.findByPk(ma.actorId);
-  //     return Promise.all([moviePromise, actorPromise]).then(
-  //       ([movie, actor]) => {
-  //         return movie.addActor(actor);
-  //       }
-  //     );
-  //});
-  //return Promise.all(associationPromises);
-  //});
+      return Promise.all([
+        ...artistPromises,
+        ...authorPromises,
+        ...contentPromises,
+        ...genrePromises,
+        ...matchPromises,
+        ...portfolioPromises,
+        ...stylePromises
+      ]);
+    })
+    .then(() => {
+      //Create the associations
+      let portfoliosPromises = PORTFOLIOS.map(ps => {
+        let artistPromise = Artist.findByPk(ps.artistId);
+        let portfolioPromise = Portfolio.findByPk(ps.id);
+        let stylePromise = Style.findByPk(ps.styleId);
+        return Promise.all([
+          artistPromise,
+          portfolioPromise,
+          stylePromise
+        ]).then(([artist, portfolio, style]) => {
+          style.setPortfolio(portfolio);
+          return artist.addPortfolio(portfolio);
+        });
+      });
+
+      let contentsPromises = CONTENTS.map(cs => {
+        let authorPromise = Author.findByPk(cs.authorId);
+        let contentPromise = Content.findByPk(cs.id);
+        let genrePromise = Genre.findByPk(cs.genreId);
+        return Promise.all([authorPromise, contentPromise, genrePromise]).then(
+          ([author, content, genre]) => {
+            genre.setContent(content);
+            return author.addContent(content);
+          }
+        );
+      });
+
+      let matchesPromises = MATCHES.map(ms => {
+        let authorPromise = Author.findByPk(ms.authorId);
+        let artistPromise = Artist.findByPk(ms.artistId);
+        let matchPromise = Match.findByPk(ms.id);
+        return Promise.all([authorPromise, artistPromise, matchPromise]).then(
+          ([author, artist, match]) => {
+            let artistMatch = match.setArtist(artist);
+            let authorMatch = match.setAuthor(author);
+            return Promise.all([artistMatch, authorMatch]);
+          }
+        );
+      });
+
+      return Promise.all([
+        portfoliosPromises,
+        contentsPromises,
+        matchesPromises
+      ]);
+    });
 })();
 
 // module.exports = seed;

@@ -91,6 +91,7 @@ export default class profileDisplayScreen extends React.Component {
             source={require("./assets/faceicon.png")}
             style = {styleDisplayProfile.facePic} />
             <Text>Upload Your First Image</Text>
+          />
 
           <TouchableOpacity style={styleDisplayProfile.buttonPosition}>
             <View style={styleDisplayProfile.onebuttonPosition}>
@@ -98,10 +99,10 @@ export default class profileDisplayScreen extends React.Component {
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
                 onPress={() => this.props.navigation.navigate("AuthorContent")}
-              > See XPression
+              >
+                See XPression
               </AwesomeButton>
             </View>
-
             <View>
               <AwesomeButton
                 textColor="#000000"
@@ -125,7 +126,6 @@ export default class profileDisplayScreen extends React.Component {
           </TouchableOpacity>
 
         </View>
-
       </KeyboardAvoidingView>
     );
   }
@@ -154,3 +154,4 @@ const styleDisplayProfile = StyleSheet.create({
     color: 'blue'
 }
 });
+

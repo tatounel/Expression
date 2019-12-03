@@ -1,6 +1,4 @@
 import React from "react";
-// import { createAppContainer, createSwitchNavigator } from "react-navigation";
-// import { createStackNavigator } from "react-navigation-stack";
 
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { creatStackNavigator, createStackNavigator } from "react-navigation-stack";
@@ -34,6 +32,63 @@ import * as firebase from 'firebase';
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
+//Calling in the files for it to stack and work as a moving screen
+
+const MainNavigator = createStackNavigator({
+  Welcome: {
+    screen: WelcomeScreen,
+    navigationOptions: () => ({
+      title: `Welcome`,
+      headerBackTitle: null
+    })
+  },
+  Login: {
+    screen: loginScreen,
+    navigationOptions: () => ({
+      title: `Login Page`,
+      headerBackTitle: null
+    })
+  },
+  Signup: {
+    screen: signUpScreen,
+    navigationOptions: () => ({
+      title: `Sign Up Page`,
+      headerBackTitle: null
+    })
+  },
+
+  EditProfile: {
+    screen: createProfileScreen,
+    navigationOptions: () => ({
+      title: `Edit Profile`,
+      headerBackTitle: null
+    })
+  },
+  DisplayProfile: {
+    screen: profileDisplayScreen,
+    navigationOptions: () => ({
+      title: "Profile",
+      headerBackTitle: null,
+      headerLeft: null
+    })
+  },
+
+  ArtistContent: {
+    screen: artistContentScreen,
+    navigationOptions: () => ({
+      title: `Artist`,
+      headerBackTitle: null
+    })
+  },
+
+  AuthorContent: {
+    screen: authorContentScreen,
+    navigationOptions: () => ({
+      title: `Author`,
+      headerBackTitle: null
+    })
+  }
+});
 
 const AppStack = createStackNavigator({
   //FIRST PAGE HERE IS THE PAGE YOU SEE AFTER SIGNUP
@@ -64,3 +119,4 @@ export default createAppContainer(
     }
   )
 );
+

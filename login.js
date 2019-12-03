@@ -2,7 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, 
         TextInput, KeyboardAvoidingView, 
         StatusBar, TouchableOpacity } from "react-native";
+
 import AwesomeButton from "react-native-really-awesome-button";
+// import Image from "react-native-scalable-image";
 
 //import firebase from "firebase";
 import User from "./chatScreens/User";
@@ -129,24 +131,23 @@ class loginScreen extends React.Component {
 
             </View>
             </KeyboardAvoidingView>
-
-        );
-    }
+    );
+  }
 }
 
 export default loginScreen;
 
 const styleLogin = StyleSheet.create({
-    container:{
-        flex: 1,
-        backgroundColor: "#ff0080",
-        alignItems: "center",
-        justifyContent: "center",
-    },
+  container: {
+    flex: 1,
+    backgroundColor: "#ff0080",
+    alignItems: "center",
+    justifyContent: "center"
+  },
 
-    loginContainer:{
-        padding: 20
-    },
+  loginContainer: {
+    padding: 20
+  },
 
     textInput: {
         height: 40,

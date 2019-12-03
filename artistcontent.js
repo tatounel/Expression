@@ -29,7 +29,8 @@ export default class artistContentScreen extends React.Component {
             textColor="#000000"
             backgroundColor="#5ce1e6"
             onPress={this._pickImage}
-          > Add New
+          >
+            Add New
           </AwesomeButton>
         </TouchableOpacity>
       </View>
@@ -54,16 +55,18 @@ export default class artistContentScreen extends React.Component {
     let photos = [];
     this.state.photo.map((item, index) => {
       photos.push(
-        <Image borderRadius={10}
+        <Image
+          borderRadius={10}
           width={150}
           height={150}
           key={index}
-          source={{ uri: item }} />
+          source={{ uri: item }}
+        />
       );
     });
     return photos;
   }
-  
+
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -97,4 +100,5 @@ const styleArtist = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around"
   }
+
 });

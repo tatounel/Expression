@@ -57,6 +57,7 @@ export default class createProfileScreen extends React.Component {
               style={styleCreateProfile.textProfileInputs}
             />
 
+
             <TextInput
               placeholder="Interest"
               placeholderTextColor="rgba(255,255,255,0.7)"
@@ -82,7 +83,8 @@ export default class createProfileScreen extends React.Component {
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
                 onPress={() => this.props.navigation.navigate("DisplayProfile")}
-              > Next
+              >
+                Next
               </AwesomeButton>
             </View>
           </TouchableOpacity>
@@ -119,6 +121,7 @@ export default class createProfileScreen extends React.Component {
       this.setState({ photo: result.uri });
     }
   };
+
 }
 
 const styleCreateProfile = StyleSheet.create({
@@ -150,4 +153,5 @@ const styleCreateProfile = StyleSheet.create({
     color: "#FFF",
     alignItems: "center"
   }
+
 });

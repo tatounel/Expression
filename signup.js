@@ -16,7 +16,7 @@ import * as firebase from "firebase";
 
 /* Built a signup screen that includes text inputs of each placeholder. 
     with no auto Cap and no auto correcting. */
-class signUpScreen extends React.Component {
+export default class signUpScreen extends React.Component {
     //For Top Page Details
     static navigationOptions = ({ navigation }) => {
         return{ 
@@ -197,9 +197,8 @@ class signUpScreen extends React.Component {
             </KeyboardAvoidingView>
         );
     }
-}
 
-export default signUpScreen;
+}
 
 const styleSignUp = StyleSheet.create({
     container:{

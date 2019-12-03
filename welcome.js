@@ -45,24 +45,24 @@ class WelcomeScreen extends React.Component {
             </View>
         )
     }
+
 }
 
 export default WelcomeScreen;
 
 const styleWelcome = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "#ff0080",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    buttoncontainer:{
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center"
-    },
-    button1:{
-        marginRight: 20
-    }
+  container: {
+    flex: 1,
+    backgroundColor: "#ff0080",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  buttoncontainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  button1: {
+    marginRight: 20
+  }
 });
-
