@@ -44,7 +44,7 @@ export default class signUpScreen extends React.Component {
   };
 
   saveNewUser = event => {
-    console.log(`Creating new ${this.state.type}`);
+    console.log(`Creating new ${this.state.type} please work`);
     fetch(`http://localhost:8000/api/${this.state.type}s/`, {
       method: "POST",
       credentials: "include",
@@ -90,11 +90,18 @@ export default class signUpScreen extends React.Component {
   // };
 
   /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
-  handleSignUp = () => {
-    firebase
+  async handleSignUp = () => {
+    console.log(
+      "Calling handle sign up function with" +
+        this.state.email +
+        " and " +
+        this.state.password
+    );
+    await firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(userCredentials => {
+        console.log(userCredentials.user);
         return userCredentials.user.updateProfile({
           displayName: this.state.firstName + " " + this.state.lastName
         });

@@ -56,8 +56,16 @@ export default class createProfileScreen extends React.Component {
     usersGenresOrStyles: ""
   };
   componentDidMount() {
-    const { email, password } = firebase.auth().currentUser;
-    this.setState({ email, password });
+    firebase.auth().onAuthStateChanged(user => {
+      if (user != null) {
+        const { email, password } = user;
+        this.setState({ email, password });
+      } else {
+        console.log("User not created");
+      }
+    });
+    // const { email, password } = firebase.auth().currentUser;
+    // this.setState({ email, password });
     this.getUserByEmail();
     this.getInterests();
     this.getGenresOrStyles();
@@ -107,11 +115,9 @@ export default class createProfileScreen extends React.Component {
         let currentUser = null;
         authorsOrArtists.filter(authorOrArtist => {
           let obj = authorOrArtist;
-          console.log(obj.email);
-          console.log(this.state.email);
           if (obj.email == this.state.email) {
             console.log("FOUND MATCH EMAIL");
-            console.log(obj + " == " + this.state.email);
+            console.log(obj.email + " == " + this.state.email);
             currentUser = obj;
           }
         });
@@ -224,9 +230,7 @@ export default class createProfileScreen extends React.Component {
       usersGenresOrStyles: temp.toString()
     });
     console.log(`Updating user ${this.state.id}`);
-    console.log(this.state.usersGenresOrStyles);
-    console.log(this.state.usersInterests);
-    console.log(this.state.bio);
+    let temp2 = this.genresOrStyle.slice(0, -1);
     fetch(`http://localhost:8000/api/${this.type}s/${this.state.id}`, {
       method: "PUT",
       credentials: "include",
@@ -234,7 +238,7 @@ export default class createProfileScreen extends React.Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        genre: `${this.state.usersGenresOrStyles}`,
+        [`${temp2}`]: `${this.state.usersGenresOrStyles}`,
         bio: `${this.state.bio}`,
         interests: `${this.state.usersInterests}`
       })
@@ -289,13 +293,6 @@ export default class createProfileScreen extends React.Component {
             </TouchableOpacity>
 
             <View style={styleCreateProfile.textContainer}>
-              {/* <TextInput
-                placeholder="Genre/Style"
-                placeholderTextColor="rgba(255,255,255,0.7)"
-                returnKeyType="next"
-                onSubmitEditing={() => this.interestInput.focus()}
-                style={styleCreateProfile.textProfileInputs}
-              /> */}
               <View>
                 <MultiSelect
                   // hideTags
@@ -321,15 +318,6 @@ export default class createProfileScreen extends React.Component {
                   submitButtonText="Submit"
                 />
               </View>
-              {/* <TextInput
-              placeholder="Interest"
-              placeholderTextColor="rgba(255,255,255,0.7)"
-              returnKeyType="next"
-              onSubmitEditing={() => this.bioInputs.focus()}
-              keyboardType="email-address"
-              style={styleCreateProfile.textProfileInputs}
-              ref={interests => (this.interestInput = interests)}
-            /> */}
               <View>
                 <MultiSelect
                   // hideTags
@@ -374,7 +362,7 @@ export default class createProfileScreen extends React.Component {
                   backgroundColor="#5ce1e6"
                   onPress={() => {
                     this.updateUser();
-                    this.props.navigation.navigate("DisplayProfile", {
+                    this.props.navigation.navigate("Profile", {
                       id: this.state.id
                     });
                   }}
