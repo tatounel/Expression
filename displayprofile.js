@@ -9,6 +9,8 @@ import {
   KeyboardAvoidingView
 } from "react-native";
 import Image from "react-native-scalable-image";
+import getInitialObject from "./writingcontent";
+
 export default class profileDisplayScreen extends React.Component {
   //this is so You can't press back on the hardware for any device once you Login
   componentWillMount() {
@@ -16,7 +18,16 @@ export default class profileDisplayScreen extends React.Component {
       return true;
     });
   }
+  state = {
+    writingContent: []
+  };
 
+  _addStory = async () => {
+    let writingContents = [];
+    this.state.writingContent.map((index, item) => {
+      writingContents.push(<getInitialObject />);
+    });
+  };
   render() {
     return (
       <KeyboardAvoidingView
@@ -30,13 +41,13 @@ export default class profileDisplayScreen extends React.Component {
             source={require("./assets/faceicon.png")}
             Text="Upload Your First Image"
           />
-
+          <View></View>
           <TouchableOpacity style={styleDisplayProfile.buttonPosition}>
             <View style={styleDisplayProfile.onebuttonPosition}>
               <AwesomeButton
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
-                onPress={() => this.props.navigation.navigate("AuthorContent")}
+                onPress={() => this.props.navigation.navigate("ArtistContent")}
               >
                 See XPression
               </AwesomeButton>
@@ -45,7 +56,7 @@ export default class profileDisplayScreen extends React.Component {
               <AwesomeButton
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
-                onPress={() => this.props.navigation.navigate("ArtistContent")}
+                onPress={() => this.props.navigation.navigate("null")}
               >
                 Find A Match
               </AwesomeButton>

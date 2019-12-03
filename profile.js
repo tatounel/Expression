@@ -75,7 +75,7 @@ export default class createProfileScreen extends React.Component {
           </View>
 
           <TouchableOpacity>
-            <View style={styleCreateProfile.editProfileButton}>
+            <View>
               <AwesomeButton
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
@@ -131,12 +131,8 @@ const styleCreateProfile = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 10,
     color: "#FFF",
-    paddingHorizontal: 70
-  },
-
-  editProfileButton: {
-    alignItems: "center",
-    textAlign: "right"
+    paddingHorizontal: 70,
+    borderWidth: 1
   },
 
   textContainer: {

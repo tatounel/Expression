@@ -44,7 +44,7 @@ export default class artistContentScreen extends React.Component {
       </View>
     );
   }
-
+  //asking for permissions
   componentDidMount() {
     this.getPermissionAsync();
     console.log("hi");
@@ -59,6 +59,7 @@ export default class artistContentScreen extends React.Component {
     }
   };
 
+  //rendering images
   _renderImages() {
     let photos = [];
     this.state.photo.map((item, index) => {
@@ -75,6 +76,7 @@ export default class artistContentScreen extends React.Component {
     return photos;
   }
 
+  //getting images from local directory
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,

@@ -126,11 +126,11 @@ export default class signUpScreen extends React.Component {
 
           <ModalDropDown
             style={styleSignUp.selectionType}
-            Text="Select Type"
+            text="Select Type"
             options={this.state.options}
             dropdownStyle={{
-              height: 90,
-              width: "30%"
+              height: 70,
+              Width: "40%"
             }}
             onSelect={type =>
               this.setState({ type: `${this.state.options[type]}` })
@@ -176,7 +176,8 @@ const styleSignUp = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 10,
     color: "#FFF",
-    paddingHorizontal: 103
+    paddingHorizontal: 103,
+    borderWidth: 1
   },
 
   textInputs2: {
@@ -185,7 +186,8 @@ const styleSignUp = StyleSheet.create({
     marginBottom: 10,
     color: "#FFF",
     paddingHorizontal: 33.5,
-    marginRight: 1
+    marginRight: 1,
+    borderWidth: 1
   },
 
   onebutton: {
@@ -202,6 +204,7 @@ const styleSignUp = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 10,
     paddingHorizontal: 95,
-    paddingVertical: 10
+    paddingVertical: 10,
+    borderWidth: 1
   }
 });

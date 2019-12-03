@@ -18,6 +18,7 @@ Please do the following:
 #New Update needs to be installed as of 11/29/2019
 -expo install expo-image-picker
 -yarn add react-native-image-view
+-yarn add react-native-cn-richtext-editor
 
 #Mac User Installation Guide:
 

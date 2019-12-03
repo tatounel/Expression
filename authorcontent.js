@@ -1,6 +1,7 @@
 import React from "react";
 import AwesomeButton from "react-native-really-awesome-button";
 import {
+  BackHandler,
   ScrollView,
   StyleSheet,
   View,
@@ -14,23 +15,24 @@ export default class authorContentScreen extends React.Component {
   render() {
     return (
       <View style={styleAuthor.container}>
+        <Image
+          width={Dimensions.get("window").width}
+          source={require("./assets/xpress.png")}
+        />
         <ScrollView contentContainerStyle={styleAuthor.container}>
-          <Image
-            width={Dimensions.get("window").width}
-            source={require("./assets/xpress.png")}
-          />
+          <View style={styleAuthor.storyContentPosition}></View>
 
           <View style={styleAuthor.storyContentPosition}></View>
-          <TouchableOpacity>
-            <AwesomeButton
-              textColor="#000000"
-              backgroundColor="#5ce1e6"
-              onPress={() => this.props.navigation.navigate("WritingContent")}
-            >
-              Add New
-            </AwesomeButton>
-          </TouchableOpacity>
         </ScrollView>
+        <TouchableOpacity>
+          <AwesomeButton
+            textColor="#000000"
+            backgroundColor="#5ce1e6"
+            onPress={() => this.props.navigation.navigate("WritingContent")}
+          >
+            Add New
+          </AwesomeButton>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -47,6 +49,7 @@ const styleAuthor = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     flexBasis: 100,
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    padding: 100
   }
 });

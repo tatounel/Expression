@@ -60,7 +60,7 @@ export default class writingContentScreen extends React.Component {
         style={{
           flex: 1,
           paddingTop: 20,
-          backgroundColor: "#eee",
+          backgroundColor: "#eeeeee",
           flexDirection: "column",
           justifyContent: "flex-end"
         }}
@@ -72,7 +72,7 @@ export default class writingContentScreen extends React.Component {
               onSelectedTagChanged={this.onSelectedTagChanged}
               onSelectedStyleChanged={this.onSelectedStyleChanged}
               value={this.state.value}
-              style={{ backgroundColor: "#fff" }}
+              style={{ backgroundColor: "#ffffff" }}
               styleList={defaultStyles}
               onValueChanged={this.onValueChanged}
             />
@@ -93,19 +93,8 @@ export default class writingContentScreen extends React.Component {
               justifyContent: "space-evenly",
               alignItems: "center"
             }}
-            size={30}
+            size={12}
             iconSet={[
-              {
-                type: "tool",
-                iconArray: [
-                  {
-                    toolTypeText: "image",
-                    iconComponent: (
-                      <Text style={styles.toolbarButton}>image</Text>
-                    )
-                  }
-                ]
-              },
               {
                 type: "tool",
                 iconArray: [
@@ -113,14 +102,54 @@ export default class writingContentScreen extends React.Component {
                     toolTypeText: "bold",
                     buttonTypes: "style",
                     iconComponent: (
-                      <Text style={styles.toolbarButton}>bold</Text>
+                      <Text style={styles.toolbarButton}>boldButton</Text>
                     )
                   }
                 ]
               },
               {
+                type: "tool",
+                iconArray: [
+                  {
+                    toolTypeText: "italic",
+                    buttonTypes: "styles",
+                    iconComponent: (
+                      <Text style={styles.toolbarButton}>italicButton</Text>
+                    )
+                  }
+                ]
+              },
+
+              {
+                type: "tool",
+                iconArray: [
+                  {
+                    toolTypeText: "underline",
+                    buttonTypes: "styles",
+                    iconComponent: (
+                      <Text style={styles.toolbarButton}>underlineButton</Text>
+                    )
+                  }
+                ]
+              },
+
+              {
+                type: "tool",
+                iconArray: [
+                  {
+                    toolTypeText: "title",
+                    buttonTypes: "styles",
+                    iconComponent: (
+                      <Text style={styles.toolbarButton}>title</Text>
+                    )
+                  }
+                ]
+              },
+
+              {
                 type: "seperator"
               },
+
               {
                 type: "tool",
                 iconArray: [
@@ -175,8 +204,8 @@ var styles = StyleSheet.create({
   },
   toolbarButton: {
     fontSize: 20,
-    width: 28,
-    height: 28,
+    width: 20,
+    height: 30,
     textAlign: "center"
   },
   italicButton: {
@@ -187,8 +216,5 @@ var styles = StyleSheet.create({
   },
   underlineButton: {
     textDecorationLine: "underline"
-  },
-  lineThroughButton: {
-    textDecorationLine: "line-through"
   }
 });
