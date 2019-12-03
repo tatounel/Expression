@@ -16,9 +16,8 @@ import chatScreen from "./chatScreens/chatScreen";
 import ProfileScreen from "./chatScreens/ProfileScreen";
 
 import LoadingScreen from "./chatScreens/LoadingScreen";
-/* YT authentication tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
 import * as firebase from 'firebase';
-  // Your web app's Firebase configuration
+  // Web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyAO19aZCQkjfLSIuMdLx1hiLcaLTrioVQ0",
     authDomain: "expression-266df.firebaseapp.com",
@@ -33,63 +32,6 @@ import * as firebase from 'firebase';
   firebase.initializeApp(firebaseConfig);
 
 //Calling in the files for it to stack and work as a moving screen
-
-const MainNavigator = createStackNavigator({
-  Welcome: {
-    screen: WelcomeScreen,
-    navigationOptions: () => ({
-      title: `Welcome`,
-      headerBackTitle: null
-    })
-  },
-  Login: {
-    screen: loginScreen,
-    navigationOptions: () => ({
-      title: `Login Page`,
-      headerBackTitle: null
-    })
-  },
-  Signup: {
-    screen: signUpScreen,
-    navigationOptions: () => ({
-      title: `Sign Up Page`,
-      headerBackTitle: null
-    })
-  },
-
-  EditProfile: {
-    screen: createProfileScreen,
-    navigationOptions: () => ({
-      title: `Edit Profile`,
-      headerBackTitle: null
-    })
-  },
-  DisplayProfile: {
-    screen: profileDisplayScreen,
-    navigationOptions: () => ({
-      title: "Profile",
-      headerBackTitle: null,
-      headerLeft: null
-    })
-  },
-
-  ArtistContent: {
-    screen: artistContentScreen,
-    navigationOptions: () => ({
-      title: `Artist`,
-      headerBackTitle: null
-    })
-  },
-
-  AuthorContent: {
-    screen: authorContentScreen,
-    navigationOptions: () => ({
-      title: `Author`,
-      headerBackTitle: null
-    })
-  }
-});
-
 const AppStack = createStackNavigator({
   //FIRST PAGE HERE IS THE PAGE YOU SEE AFTER SIGNUP
   Profile: ProfileScreen,
