@@ -119,7 +119,7 @@ class loginScreen extends React.Component {
                     backgroundColor= "#5ce1e6"
                     onPress = {this.handleLogin, () => 
                       this.props.navigation.navigate("DisplayProfile")}
-                    // onPress = {this.handleLogin}
+                      onPress = {this.handleLogin}
                     >Login
                 </AwesomeButton>
 
