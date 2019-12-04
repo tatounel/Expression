@@ -17,9 +17,7 @@ import ModalDropDown from "react-native-modal-dropdown";
 
 //import RNPickerSelect from "react-native-picker-select";
 //import TypeOfHobby from './selectionView';
-
 import * as firebase from "firebase";
-//------------------------------------------------------------------------------------
 
 /* Built a signup screen that includes text inputs of each placeholder. 
     with no auto Cap and no auto correcting. */
@@ -43,9 +41,27 @@ export default class signUpScreen extends React.Component {
     options: ["Artist", "Author"]
   };
 
+  signOut = () => {
+    firebase.auth().signOut();
+  };
+
+  handleSignUp = () => {
+    this.signOut();
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(userCredentials => {
+        console.log(userCredentials.user);
+        return userCredentials.user.updateProfile({
+          displayName: this.state.firstName + " " + this.state.lastName
+        });
+      })
+      .catch(error => this.setState({ errorMessage: error.message }));
+  };
+
   saveNewUser = event => {
     console.log(`Creating new ${this.state.type} please work`);
-    fetch(`http://localhost:8000/api/${this.state.type}s/`, {
+    return fetch(`http://localhost:8000/api/${this.state.type}s/`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -75,39 +91,7 @@ export default class signUpScreen extends React.Component {
       });
   };
 
-  //authentication tutorial from web
-  // SignUp = (email, password) => {
-  //   try {
-  //     firebase
-  //         .auth()
-  //         .createUserWithEmailAndPassword(email, password)
-  //         .then(user => {
-  //                console.log(user);
-  //          });
-  //   } catch (error) {
-  //     console.log(error.toString(error));
-  //   }
-  // };
-
   /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
-  async handleSignUp = () => {
-    console.log(
-      "Calling handle sign up function with" +
-        this.state.email +
-        " and " +
-        this.state.password
-    );
-    await firebase
-      .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(userCredentials => {
-        console.log(userCredentials.user);
-        return userCredentials.user.updateProfile({
-          displayName: this.state.firstName + " " + this.state.lastName
-        });
-      })
-      .catch(error => this.setState({ errorMessage: error.message }));
-  };
 
   render() {
     return (
@@ -193,13 +177,15 @@ export default class signUpScreen extends React.Component {
               textColor="#000000"
               backgroundColor="#5ce1e6"
               onPress={() => {
-                this.saveNewUser();
-                //this.props.navigation.navigate("EditProfile");
-                this.handleSignUp();
-                // this.SignUp(this.state.email, this.state.password);
-                this.props.navigation.navigate("EditProfile", {
-                  type: this.state.type
-                });
+                this.handleSignUp()
+                  .then(() => {
+                    return this.saveNewUser();
+                  })
+                  .then(() => {
+                    this.props.navigation.navigate("EditProfile", {
+                      type: this.state.type
+                    });
+                  });
               }}
             >
               <Text>Register</Text>

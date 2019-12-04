@@ -66,9 +66,16 @@ export default class createProfileScreen extends React.Component {
     });
     // const { email, password } = firebase.auth().currentUser;
     // this.setState({ email, password });
-    this.getUserByEmail();
-    this.getInterests();
-    this.getGenresOrStyles();
+    this.getUserByEmail()
+      .then(() => {
+        return this.getInterests();
+      })
+      .then(() => {
+        return this.getGenresOrStyles();
+      })
+      .then(() => {
+        console.log("Finished all profile async functions");
+      });
 
     // console.log(this.state.type);
     this.getPermissionAsync();
@@ -93,7 +100,7 @@ export default class createProfileScreen extends React.Component {
 
   getUserByEmail = () => {
     // console.log(`${params}`);
-    fetch(`http://localhost:8000/api/${this.type}s/`, {
+    return fetch(`http://localhost:8000/api/${this.type}s/`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -134,7 +141,7 @@ export default class createProfileScreen extends React.Component {
       });
   };
   getInterests = () => {
-    fetch(`http://localhost:8000/api/${this.interests}/`, {
+    return fetch(`http://localhost:8000/api/${this.interests}/`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -170,7 +177,7 @@ export default class createProfileScreen extends React.Component {
   };
 
   getGenresOrStyles = () => {
-    fetch(`http://localhost:8000/api/${this.genreOrStyle}/`, {
+    return fetch(`http://localhost:8000/api/${this.genreOrStyle}/`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -209,29 +216,23 @@ export default class createProfileScreen extends React.Component {
     console.log(this.state.interests[1].name);
     let temp = [];
     let interestsNum = this.state.selectedInterests;
-    for (i = 0; i < this.state.selectedInterests.length; i++) {
-      temp.push(
-        this.state.interests[parseInt(this.state.selectedInterests[i])].name
-      );
+    for (i = 0; i < interestsNum.length; i++) {
+      temp.push(this.state.interests[parseInt(interestsNum[i])].name);
     }
     this.setState({
       usersInterests: temp.toString()
     });
     temp = [];
     let genresOrStylesNum = this.state.selectedGenresOrStyles;
-    for (i = 0; i < this.state.selectedGenresOrStyles.length; i++) {
-      temp.push(
-        this.state.genresOrStyles[
-          parseInt(this.state.selectedGenresOrStyles[i])
-        ].name
-      );
+    for (i = 0; i < genresOrStylesNum.length; i++) {
+      temp.push(this.state.genresOrStyles[parseInt(genresOrStylesNum[i])].name);
     }
     this.setState({
       usersGenresOrStyles: temp.toString()
     });
     console.log(`Updating user ${this.state.id}`);
-    let temp2 = this.genresOrStyle.slice(0, -1);
-    fetch(`http://localhost:8000/api/${this.type}s/${this.state.id}`, {
+    let temp2 = this.genreOrStyle.slice(0, -1);
+    return fetch(`http://localhost:8000/api/${this.type}s/${this.state.id}`, {
       method: "PUT",
       credentials: "include",
       headers: {
@@ -250,7 +251,7 @@ export default class createProfileScreen extends React.Component {
         }
         throw new Error("Content validation");
       })
-      .then(artist => {
+      .then(artistOrAuthor => {
         this.setState({
           success: true
         });
@@ -361,9 +362,11 @@ export default class createProfileScreen extends React.Component {
                   textColor="#000000"
                   backgroundColor="#5ce1e6"
                   onPress={() => {
-                    this.updateUser();
-                    this.props.navigation.navigate("Profile", {
-                      id: this.state.id
+                    this.updateUser().then(() => {
+                      this.props.navigation.navigate("DisplayProfile", {
+                        id: this.state.id,
+                        type: this.type
+                      });
                     });
                   }}
                 >
@@ -376,7 +379,10 @@ export default class createProfileScreen extends React.Component {
               <AwesomeButton
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
-                onPress={this.signOut}
+                onPress={() => {
+                  this.signOut();
+                  this.props.navigation.navigate("Welcome");
+                }}
               >
                 <Text style={styleCreateProfile.editProfileButton}>Logout</Text>
               </AwesomeButton>

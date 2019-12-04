@@ -131,7 +131,7 @@ class loginScreen extends React.Component {
             onPress={() => {
               this.handleLogin;
               // this.props.navigation.navigate("DisplayProfile");
-              this.props.navigation.navigate("EditProfile");
+              this.props.navigation.navigate("DisplayProfile");
             }}
           >
             <Text>Login</Text>

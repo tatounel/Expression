@@ -14,18 +14,74 @@ import {
 } from "react-native";
 //import Image from "react-native-scalable-image";
 //import AwesomeButton from "react-native-really-awesome-button";
+import MultipleTags from "react-native-multiple-tags";
 
 import User from "./chatScreens/User";
 import * as firebase from "firebase";
 
 export default class profileDisplayScreen extends React.Component {
-  //this is so You can't press back on the hardware for any device once you Login
-  componentWillMount() {
-    BackHandler.addEventListener("hardwareBackPress", function() {
-      return true;
-    });
+  constructor(props) {
+    super(props);
+    this.id = props.navigation.state.params.id;
+    this.type = props.navigation.state.params.type;
+    if (this.type == "Author") {
+      this.genreOrStyle = "genre";
+    } else if (this.type == "Artist") {
+      this.genreOrStyle = "style";
+    }
   }
 
+  state = {
+    bio: "",
+    interests: [],
+    [`${this.genreOrStyle}`]: []
+  };
+  getCurrentUserInfo = () => {
+    console.log(
+      "get current user function called with " + this.type + " and " + this.id
+    );
+    return fetch(`http://localhost:8000/api/${this.type}s/${this.id}`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        //console.log(`Got genres: ${res}`);
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("Content validation");
+      })
+      .then(user => {
+        // let temp = this.genreOrStyle
+        this.setState({
+          success: true,
+          bio: user.bio,
+          interests: user.interests.split(","),
+          [`${this.genreOrStyle}`]: user[`${this.genreOrStyle}`].split(",")
+        });
+        console.log(this.state.interests);
+        console.log(this.state[`${this.genreOrStyle}`]);
+      })
+      .catch(err => {
+        this.setState({
+          error: true
+        });
+      });
+  };
+
+  //this is so You can't press back on the hardware for any device once you Login
+  componentDidMount() {
+    console.log("Component did mount on display profile called");
+    this.getCurrentUserInfo().then(() =>
+      console.log("User gotten successfully")
+    );
+    // BackHandler.addEventListener("hardwareBackPress", function() {
+    //   return true;
+    // });
+  }
   //logout Button
   logOut = async () => {
     await AsyncStorage.clear();
@@ -104,6 +160,22 @@ export default class profileDisplayScreen extends React.Component {
             style={styleDisplayProfile.facePic}
           />
           <Text>Upload Your First Image</Text>
+          <MultipleTags
+            tags={this.state[`${this.genreOrStyle}`]}
+            search
+            onChangeItem={content => {
+              this.setState({ content });
+            }}
+            title="Genres Or Styles"
+          />
+          <MultipleTags
+            tags={this.state.interests}
+            search
+            onChangeItem={content => {
+              this.setState({ content });
+            }}
+            title="Interests"
+          />
 
           <TouchableOpacity style={styleDisplayProfile.buttonPosition}>
             <View style={styleDisplayProfile.onebuttonPosition}>
