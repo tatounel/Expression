@@ -142,6 +142,9 @@ export default class signUpScreen extends React.Component {
         <TouchableOpacity>
           <View style={styleSignUp.onebutton}>
             <AwesomeButton
+              progress={true}
+              progressLoadingTime={10000}
+              width={100}
               textColor="#000000"
               backgroundColor="#5ce1e6"
               alignItems="center"
@@ -191,6 +194,7 @@ const styleSignUp = StyleSheet.create({
   },
 
   onebutton: {
+    marginBottom: 20,
     alignItems: "center",
     textAlign: "right"
   },

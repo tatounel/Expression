@@ -9,7 +9,6 @@ import {
   KeyboardAvoidingView
 } from "react-native";
 import Image from "react-native-scalable-image";
-import getInitialObject from "./writingcontent";
 
 export default class profileDisplayScreen extends React.Component {
   //this is so You can't press back on the hardware for any device once you Login
@@ -18,16 +17,7 @@ export default class profileDisplayScreen extends React.Component {
       return true;
     });
   }
-  state = {
-    writingContent: []
-  };
 
-  _addStory = async () => {
-    let writingContents = [];
-    this.state.writingContent.map((index, item) => {
-      writingContents.push(<getInitialObject />);
-    });
-  };
   render() {
     return (
       <KeyboardAvoidingView
@@ -41,10 +31,11 @@ export default class profileDisplayScreen extends React.Component {
             source={require("./assets/faceicon.png")}
             Text="Upload Your First Image"
           />
-          <View></View>
+
           <TouchableOpacity style={styleDisplayProfile.buttonPosition}>
             <View style={styleDisplayProfile.onebuttonPosition}>
               <AwesomeButton
+                width={120}
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
                 onPress={() => this.props.navigation.navigate("ArtistContent")}
@@ -54,11 +45,12 @@ export default class profileDisplayScreen extends React.Component {
             </View>
             <View>
               <AwesomeButton
+                width={120}
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
-                onPress={() => this.props.navigation.navigate("null")}
+                onPress={() => this.props.navigation.navigate("MatchContent")}
               >
-                Find A Match
+                Find Match
               </AwesomeButton>
             </View>
           </TouchableOpacity>

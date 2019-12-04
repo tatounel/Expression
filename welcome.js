@@ -25,6 +25,8 @@ class WelcomeScreen extends React.Component {
         <TouchableOpacity style={styleWelcome.buttoncontainer}>
           <View style={styleWelcome.button1}>
             <AwesomeButton
+              width={80}
+              raiseLevel={10}
               textColor="#000000"
               backgroundColor="#5ce1e6"
               onPress={() => this.props.navigation.navigate("Login")}
@@ -35,6 +37,8 @@ class WelcomeScreen extends React.Component {
 
           <View>
             <AwesomeButton
+              width={80}
+              raiseLevel={10}
               textColor="#000000"
               backgroundColor="#5ce1e6"
               onPress={() => this.props.navigation.navigate("Signup")}

@@ -77,6 +77,7 @@ export default class createProfileScreen extends React.Component {
           <TouchableOpacity>
             <View>
               <AwesomeButton
+                width={70}
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
                 onPress={() => this.props.navigation.navigate("DisplayProfile")}

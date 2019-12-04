@@ -9,6 +9,7 @@ import profileDisplayScreen from "./displayprofile";
 import artistContentScreen from "./artistcontent";
 import authorContentScreen from "./authorcontent";
 import writingContentScreen from "./writingcontent";
+import matchScreen from "./findingmatch";
 
 //Calling in the files for it to stack and work as a moving screen
 
@@ -66,10 +67,19 @@ const MainNavigator = createStackNavigator({
       headerBackTitle: null
     })
   },
+
   WritingContent: {
     screen: writingContentScreen,
     navigationOptions: () => ({
       title: `Edit Content`,
+      headerBackTitle: null
+    })
+  },
+
+  MatchContent: {
+    screen: matchScreen,
+    navigationOptions: () => ({
+      title: "Matching",
       headerBackTitle: null
     })
   }

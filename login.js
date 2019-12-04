@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import AwesomeButton from "react-native-really-awesome-button";
 import Image from "react-native-scalable-image";
-
 //Built a login that includes inputs of each placeholder needed to be filled out
+
 class loginScreen extends React.Component {
   render() {
     return (
@@ -49,6 +49,9 @@ class loginScreen extends React.Component {
             />
           </View>
           <AwesomeButton
+            progress={true}
+            progressLoadingTime={10000}
+            width={70}
             textColor="#000000"
             backgroundColor="#5ce1e6"
             onPress={() => this.props.navigation.navigate("DisplayProfile")}
