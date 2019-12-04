@@ -11,6 +11,13 @@ export default class ProfileScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return{ 
           title: 'Chat_Profile',
+          headerRight: (
+              //Profile Icon on the TopRight Side of Bar
+            <TouchableOpacity onPress = {() => navigation.navigate('Profile')} >
+                <Image style= {{ width:32, height: 32, marginRight: 5}}
+                source={require('./usercircle.png')}/>
+            </TouchableOpacity>
+          )
         }
       }
     
@@ -41,7 +48,7 @@ export default class ProfileScreen extends React.Component {
 
                 <Text style={{ fontSize: 20 }}>
                     {/* {User.name} */}
-                    Hi {this.state.null}
+                    {/* Hi {this.state.null} */}
                 </Text>
 
                 {/* <TouchableOpacity onPress={this.logOut}> */}
@@ -56,7 +63,11 @@ export default class ProfileScreen extends React.Component {
 
 const profileStyle = StyleSheet.create({
     container:{
-        flex: 1
+        flex: 1,
+        padding: 20,
+        backgroundColor: "#ff0080",
+        alignItems: "center",
+        justifyContent: "center"
     },
     logout: {
         textAlign: 'center',
