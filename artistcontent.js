@@ -11,6 +11,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
+import Image from "react-native-scalable-image";
 
 export default class artistContentScreen extends React.Component {
   state = {
@@ -47,7 +48,7 @@ export default class artistContentScreen extends React.Component {
   //asking for permissions
   componentDidMount() {
     this.getPermissionAsync();
-    console.log("hi");
+    console.log("Hi!");
   }
 
   getPermissionAsync = async () => {
@@ -110,4 +111,5 @@ const styleArtist = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around"
   }
+
 });

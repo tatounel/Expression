@@ -21,7 +21,6 @@ export default class authorContentScreen extends React.Component {
         />
         <ScrollView contentContainerStyle={styleAuthor.container}>
           <View style={styleAuthor.storyContentPosition}></View>
-
           <View style={styleAuthor.storyContentPosition}></View>
         </ScrollView>
         <TouchableOpacity>
@@ -52,4 +51,5 @@ const styleAuthor = StyleSheet.create({
     justifyContent: "space-around",
     padding: 100
   }
+
 });
