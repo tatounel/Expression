@@ -8,7 +8,6 @@ import {
   BackHandler,
   TouchableOpacity,
   KeyboardAvoidingView,
-  FlatList,
   SafeAreaView,
   AsyncStorage
 } from "react-native";
@@ -34,7 +33,7 @@ export default class profileDisplayScreen extends React.Component {
   state = {
     bio: "",
     interests: [],
-    [`${this.genreOrStyle}`]: []
+    genreOrStyle: []
   };
   getCurrentUserInfo = () => {
     console.log(
@@ -59,11 +58,13 @@ export default class profileDisplayScreen extends React.Component {
         this.setState({
           success: true,
           bio: user.bio,
-          interests: user.interests.split(","),
-          [`${this.genreOrStyle}`]: user[`${this.genreOrStyle}`].split(",")
+          interests: user.interests,
+          genreOrStyle: user[`${this.genreOrStyle}`]
         });
+
+        console.log(user[`${this.genreOrStyle}`]);
         console.log(this.state.interests);
-        console.log(this.state[`${this.genreOrStyle}`]);
+        console.log(this.state.genreOrStyle);
       })
       .catch(err => {
         this.setState({
@@ -160,22 +161,25 @@ export default class profileDisplayScreen extends React.Component {
             style={styleDisplayProfile.facePic}
           />
           <Text>Upload Your First Image</Text>
-          <MultipleTags
-            tags={this.state[`${this.genreOrStyle}`]}
-            search
+          {/* <MultipleTags
+            tags={this.state.genreOrStyle}
+            // search
             onChangeItem={content => {
               this.setState({ content });
             }}
             title="Genres Or Styles"
-          />
-          <MultipleTags
+          /> */}
+          {/* <MultipleTags
             tags={this.state.interests}
-            search
+            // search
             onChangeItem={content => {
               this.setState({ content });
             }}
             title="Interests"
-          />
+          /> */}
+          <Text>Bio: {this.state.bio}</Text>
+          <Text>Genre or Style: {this.state.genreOrStyle}</Text>
+          <Text>Interests: {this.state.interests}</Text>
 
           <TouchableOpacity style={styleDisplayProfile.buttonPosition}>
             <View style={styleDisplayProfile.onebuttonPosition}>
@@ -197,13 +201,7 @@ export default class profileDisplayScreen extends React.Component {
               </AwesomeButton>
             </View>
           </TouchableOpacity>
-          <SafeAreaView>
-            <FlatList
-              data={this.state.users}
-              renderItem={this.renderRow}
-              keyExtractor={item => item.email}
-            />
-          </SafeAreaView>
+
           <TouchableOpacity onPress={this.logOut}>
             <Text style={styleDisplayProfile.logout}>Logout</Text>
           </TouchableOpacity>

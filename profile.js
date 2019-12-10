@@ -168,6 +168,7 @@ export default class createProfileScreen extends React.Component {
         this.setState({
           interests: items
         });
+        console.log(this.state.interests);
       })
       .catch(err => {
         this.setState({
@@ -204,6 +205,7 @@ export default class createProfileScreen extends React.Component {
         this.setState({
           genresOrStyles: items
         });
+        console.log(this.state.genresOrStyles);
       })
       .catch(err => {
         this.setState({
@@ -213,23 +215,45 @@ export default class createProfileScreen extends React.Component {
   };
 
   updateUser = event => {
-    console.log(this.state.interests[1].name);
+    // console.log(this.state.interests[1].name);
+    // console.log(this.state.genresOrStyles[1].name);
+
     let temp = [];
-    let interestsNum = this.state.selectedInterests;
-    for (i = 0; i < interestsNum.length; i++) {
-      temp.push(this.state.interests[parseInt(interestsNum[i])].name);
+    let interestsNum = this.state.selectedInterests.length;
+    let num = 0;
+    console.log(interestsNum + "interest num value");
+    for (i = 0; i < interestsNum; i++) {
+      num = parseInt(this.state.selectedInterests[i]) - 1;
+      console.log(num + " Num of interests" + this.state.selectedInterests[i]);
+      temp.push(this.state.interests[num].name);
+      console.log(this.state.interests[num].name);
     }
+    console.log(temp + "temp before set state of users interests");
     this.setState({
       usersInterests: temp.toString()
     });
+    console.log(temp.toString() + " temp as string");
     temp = [];
-    let genresOrStylesNum = this.state.selectedGenresOrStyles;
-    for (i = 0; i < genresOrStylesNum.length; i++) {
-      temp.push(this.state.genresOrStyles[parseInt(genresOrStylesNum[i])].name);
+    let genresOrStylesNum = this.state.selectedGenresOrStyles.length;
+    console.log(
+      this.state.selectedGenresOrStyles +
+        "value assigned to genreorstyles length"
+    );
+    num = 0;
+    console.log(genresOrStylesNum + "length of genres or styles");
+    for (i = 0; i < genresOrStylesNum; i++) {
+      num = parseInt(this.state.selectedGenresOrStyles[i]) - 1;
+      console.log(
+        num + " Num of genres or styles" + this.state.genresOrStyles[num].name
+      );
+      temp.push(this.state.genresOrStyles[num].name);
     }
+    console.log(temp + "temp before set state of users genres or styles");
     this.setState({
       usersGenresOrStyles: temp.toString()
     });
+    console.log(temp.toString() + " temp as string");
+
     console.log(`Updating user ${this.state.id}`);
     let temp2 = this.genreOrStyle.slice(0, -1);
     return fetch(`http://localhost:8000/api/${this.type}s/${this.state.id}`, {
