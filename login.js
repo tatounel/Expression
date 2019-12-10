@@ -2,23 +2,21 @@ import React from "react";
 import {
   StyleSheet,
   Text,
-  View,
-  Image,
   TextInput,
+  Dimensions,
+  View,
   KeyboardAvoidingView,
   StatusBar,
   TouchableOpacity
 } from "react-native";
-
 import AwesomeButton from "react-native-really-awesome-button";
-// import Image from "react-native-scalable-image";
-
+import Image from "react-native-scalable-image";
+//Built a login that includes inputs of each placeholder needed to be filled out
 //import firebase from "firebase";
 import User from "./chatScreens/User";
 
 import * as firebase from "firebase";
 
-//Building a login that includes inputs of each placeholder needed to be filled out
 class loginScreen extends React.Component {
   //For Top Page Details
   static navigationOptions = ({ navigation }) => {
@@ -87,15 +85,18 @@ class loginScreen extends React.Component {
         <View style={styleLogin.container}>
           <StatusBar barStyle="light-content" />
           <Text>Welcome To</Text>
+
           <Image
-            style={{ width: 300, height: 200 }}
+            width={Dimensions.get("window").width}
             source={require("./assets/xpression.png")}
           />
+
+
           <Text>Where Artists and Authors Unite</Text>
 
           <View style={styleLogin.loginContainer}>
             <TextInput
-              placeholder="E-mail or Username"
+              placeholder="E-mail"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
               onSubmitEditing={() => this.passwordInput.focus()}
@@ -114,23 +115,20 @@ class loginScreen extends React.Component {
               returnKeyType="go"
               secureTextEntry
               style={styleLogin.textInput}
-              //refer to onsubmitediting, this helps move onto the next input
+             //refer to onsubmitediting, this helps move onto the next input
               ref={input => (this.passwordInput = input)}
               //for chatScreen
               value={this.state.password}
               onChangeText={this.handleChange("password")}
             />
           </View>
-
           <AwesomeButton
-            style={styleLogin.button1}
+            progress={true}
+            progressLoadingTime={10000}
+            width={70}
             textColor="#000000"
             backgroundColor="#5ce1e6"
-            onPress={() => {
-              this.handleLogin;
-              // this.props.navigation.navigate("DisplayProfile");
-              this.props.navigation.navigate("DisplayProfile");
-            }}
+            onPress={() => this.props.navigation.navigate("DisplayProfile")}
           >
             <Text>Login</Text>
           </AwesomeButton>
@@ -140,6 +138,7 @@ class loginScreen extends React.Component {
               <Text style={styleLogin.error}>{this.state.errorMessage}</Text>
             )}
           </View>
+
         </View>
       </KeyboardAvoidingView>
     );
@@ -163,12 +162,14 @@ const styleLogin = StyleSheet.create({
   loginContainer: {
     padding: 20
   },
+
   textInput: {
     height: 40,
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 20,
     color: "#FFF",
-    paddingHorizontal: 10
+    paddingHorizontal: 50,
+    borderWidth: 1
   },
   errorMessage: {
     //height: 72,

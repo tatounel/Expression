@@ -53,7 +53,8 @@ export default class createProfileScreen extends React.Component {
     id: "",
     bio: "",
     usersInterests: "",
-    usersGenresOrStyles: ""
+    usersGenresOrStyles: "",
+    photo: null
   };
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
@@ -455,13 +456,10 @@ const styleCreateProfile = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 10,
     color: "#FFF",
-    paddingHorizontal: 70
+    paddingHorizontal: 70,
+    borderWidth: 1
   },
 
-  editProfileButton: {
-    alignItems: "center",
-    textAlign: "right"
-  },
 
   textContainer: {
     padding: 20

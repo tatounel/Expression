@@ -4,15 +4,13 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
   BackHandler,
   TouchableOpacity,
   KeyboardAvoidingView,
   SafeAreaView,
   AsyncStorage
 } from "react-native";
-//import Image from "react-native-scalable-image";
-//import AwesomeButton from "react-native-really-awesome-button";
+import Image from "react-native-scalable-image";
 import MultipleTags from "react-native-multiple-tags";
 
 import User from "./chatScreens/User";
@@ -184,20 +182,22 @@ export default class profileDisplayScreen extends React.Component {
           <TouchableOpacity style={styleDisplayProfile.buttonPosition}>
             <View style={styleDisplayProfile.onebuttonPosition}>
               <AwesomeButton
+                width={120}
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
-                onPress={() => this.props.navigation.navigate("AuthorContent")}
+                onPress={() => this.props.navigation.navigate("ArtistContent")}
               >
                 <Text>See XPression</Text>
               </AwesomeButton>
             </View>
             <View>
               <AwesomeButton
+                width={120}
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
-                onPress={() => this.props.navigation.navigate("ArtistContent")}
+                onPress={() => this.props.navigation.navigate("MatchContent")}
               >
-                <Text>Find A Match</Text>
+               <Text>Find A Match</Text>
               </AwesomeButton>
             </View>
           </TouchableOpacity>

@@ -2,25 +2,24 @@ import React from "react";
 import {
   StyleSheet,
   Text,
-  View,
-  Image,
-  StatusBar,
   TextInput,
+  View,
+  Dimensions,
   KeyboardAvoidingView,
+  StatusBar,
   TouchableOpacity,
   TouchableWithoutFeedback
 } from "react-native";
 import AwesomeButton from "react-native-really-awesome-button";
-
-//import Image from "react-native-scalable-image";
+import Image from "react-native-scalable-image";
 import ModalDropDown from "react-native-modal-dropdown";
 
 //import RNPickerSelect from "react-native-picker-select";
 //import TypeOfHobby from './selectionView';
 import * as firebase from "firebase";
 
-/* Built a signup screen that includes text inputs of each placeholder. 
-    with no auto Cap and no auto correcting. */
+//Built a signup screen that includes text inputs of each placeholder. with no auto Cap and no auto correcting. Making sure everytime
+//you finish one part, it move onto the next one with the "next() or arrow" button depending on which device you have
 export default class signUpScreen extends React.Component {
   //For Top Page Details
   static navigationOptions = ({ navigation }) => {
@@ -35,9 +34,7 @@ export default class signUpScreen extends React.Component {
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
     type: "",
-    errorMessage: null,
     options: ["Artist", "Author"]
   };
 
@@ -90,6 +87,7 @@ export default class signUpScreen extends React.Component {
       });
   };
 
+
   /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
 
   render() {
@@ -99,47 +97,51 @@ export default class signUpScreen extends React.Component {
           <StatusBar barStyle="light-content" />
           <Text>Welcome To</Text>
           <Image
-            style={{ width: 300, height: 200 }}
+            width={Dimensions.get("window").width}
             source={require("./assets/xpression.png")}
           />
           <Text>Where Artists and Authors Unite</Text>
 
           <View style={styleSignUp.rowContainer}>
             <TextInput
+              id="fName"
               placeholder="First Name"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
               onSubmitEditing={() => this.lastName.focus()}
+              autoCapitalize="none"
               autoCorrect={false}
               style={styleSignUp.textInputs2}
-              onChangeText={firstName => this.setState({ firstName })}
+              onChangeText={firstName =>
+                this.setState({ firstName: firstName })
+              }
               value={this.state.firstName}
             />
 
             <TextInput
+              id="LName"
               placeholder="Last Name"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
               onSubmitEditing={() => this.eMail.focus()}
               style={styleSignUp.textInputs2}
               ref={input => (this.lastName = input)}
-              onChangeText={lastName => this.setState({ lastName })}
+              onChangeText={lastName => this.setState({ lastName: lastName })}
               value={this.state.lastName}
             />
           </View>
 
           <View style={styleSignUp.signUpContainer}>
             <TextInput
+              id="emailing"
               placeholder="E-Mail"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
-              onSubmitEditing={() => this.userName.focus()}
+              onSubmitEditing={() => this.passwordInput.focus()}
               keyboardType="email-address"
               style={styleSignUp.textInputs}
-              autoCapitalize="none"
-              autoCorrect={false}
               ref={input => (this.eMail = input)}
-              onChangeText={email => this.setState({ email })}
+              onChangeText={email => this.setState({ email: email })}
               value={this.state.email}
             />
 
@@ -148,11 +150,12 @@ export default class signUpScreen extends React.Component {
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
               onSubmitEditing={() => this.artistInput.focus()}
-              secureTextEntry={true}
+              secureTextEntry
+              style={styleSignUp.textInputs}
+              ref={input => (this.passwordInput = input)}
               autoCorrect={false}
               autoCapitalize="none"
               style={styleSignUp.textInputs}
-              ref={input => (this.passwordInput = input)}
               onChangeText={password => this.setState({ password })}
               value={this.state.password}
             />
@@ -160,9 +163,13 @@ export default class signUpScreen extends React.Component {
 
           <ModalDropDown
             style={styleSignUp.selectionType}
-            Text="Select Type"
+            text="Select Type"
             options={this.state.options}
-            dropdownStyle={{ height: 90, width: "30%" }}
+            dropdownStyle={{
+              height: 70,
+              Width: "40%"
+            }}
+
             onSelect={type =>
               this.setState({ type: `${this.state.options[type]}` })
             }
@@ -173,8 +180,12 @@ export default class signUpScreen extends React.Component {
         <TouchableOpacity>
           <View style={styleSignUp.onebutton}>
             <AwesomeButton
+              progress={true}
+              progressLoadingTime={10000}
+              width={100}
               textColor="#000000"
               backgroundColor="#5ce1e6"
+              alignItems="center"
               onPress={() => {
                 this.handleSignUp()
                   .then(() => {
@@ -213,10 +224,22 @@ const styleSignUp = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 10,
     color: "#FFF",
-    paddingHorizontal: 70
+    paddingHorizontal: 103,
+    borderWidth: 1
+  },
+
+  textInputs2: {
+    height: 40,
+    backgroundColor: "rgba(255,255,255,0.2)",
+    marginBottom: 10,
+    color: "#FFF",
+    paddingHorizontal: 33.5,
+    marginRight: 1,
+    borderWidth: 1
   },
 
   onebutton: {
+    marginBottom: 20,
     alignItems: "center",
     textAlign: "right"
   },
@@ -238,6 +261,7 @@ const styleSignUp = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 10,
     paddingHorizontal: 95,
-    paddingVertical: 10
+    paddingVertical: 10,
+    borderWidth: 1
   }
 });

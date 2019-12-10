@@ -5,7 +5,8 @@ import {
   View,
   Text,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
@@ -24,11 +25,13 @@ export default class artistContentScreen extends React.Component {
           width={Dimensions.get("window").width}
           source={require("./assets/xpress.png")}
         />
-        <View style={styleArtist.imgContentPositionColumn}>
-          <View style={styleArtist.imgContentPosition}>
-            {this._renderImages()}
+        <ScrollView>
+          <View style={styleArtist.imgContentPositionColumn}>
+            <View style={styleArtist.imgContentPosition}>
+              {this._renderImages()}
+            </View>
           </View>
-        </View>
+        </ScrollView>
 
         <TouchableOpacity>
           <AwesomeButton
@@ -42,7 +45,7 @@ export default class artistContentScreen extends React.Component {
       </View>
     );
   }
-
+  //asking for permissions
   componentDidMount() {
     this.getPermissionAsync();
     console.log("Hi!");
@@ -57,6 +60,7 @@ export default class artistContentScreen extends React.Component {
     }
   };
 
+  //rendering images
   _renderImages() {
     let photos = [];
     this.state.photo.map((item, index) => {
@@ -73,6 +77,7 @@ export default class artistContentScreen extends React.Component {
     return photos;
   }
 
+  //getting images from local directory
   _pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
