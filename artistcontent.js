@@ -1,9 +1,9 @@
 import React from "react";
 import AwesomeButton from "react-native-really-awesome-button";
-import Image from "react-native-scalable-image";
 import {
   StyleSheet,
   View,
+  Text,
   Dimensions,
   TouchableOpacity,
   ScrollView
@@ -39,7 +39,7 @@ export default class artistContentScreen extends React.Component {
             backgroundColor="#5ce1e6"
             onPress={this._pickImage}
           >
-            Add New
+            <Text>Add New</Text>
           </AwesomeButton>
         </TouchableOpacity>
       </View>
@@ -111,5 +111,4 @@ const styleArtist = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "space-around"
   }
-
 });

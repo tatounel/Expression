@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   View,
+  Text,
   Dimensions,
   TouchableOpacity
 } from "react-native";
@@ -51,5 +52,4 @@ const styleAuthor = StyleSheet.create({
     justifyContent: "space-around",
     padding: 100
   }
-
 });
