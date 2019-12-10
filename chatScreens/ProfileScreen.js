@@ -70,3 +70,4 @@ const profileStyle = StyleSheet.create({
     color: "blue"
   }
 });
+    

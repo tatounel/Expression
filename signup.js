@@ -44,7 +44,6 @@ export default class signUpScreen extends React.Component {
   signOut = () => {
     firebase.auth().signOut();
   };
-
   handleSignUp = () => {
     this.signOut();
     return firebase

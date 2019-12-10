@@ -60,7 +60,7 @@ class loginScreen extends React.Component {
     }
   };
 
-  //authentication tutorial from web
+  //authentication vr. 0
   // Login = (email, password) => {
   //   try {
   //     firebase
@@ -73,8 +73,6 @@ class loginScreen extends React.Component {
   //     console.log(error.toString(error));
   //   }
   // };
-
-  /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
   handleLogin = () => {
     const { email, password } = this.state;
     firebase
