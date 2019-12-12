@@ -25,39 +25,13 @@ class loginScreen extends React.Component {
       name: "",
       errormsg: null
     }
-    
-    // CHAT APP #latest  https://www.youtube.com/watch?v=_e-5bMYVq7Y
-    // constructor(){
-    //   super();
-    //   this.state = {
-    //     email: "",
-    //     password: "",
-    //     loading: false,
-    //     error: "",
-    //     mount: false
-    //   };
-    //   firebase.auth().onAuthStateChanged(user => {
-    //     if(user){
-    //       this.props.navigation.navigate("Boiler");
-    //       this.setState({
-    //         loading: false
-    //       });
-    //     }
-    //   });
-    // }
+   
 
   
     //FOR CHAT APP
     handleChange = key => val => {
       this.setState({ [key] : val})
     }
-    // componentWillMount(){
-    //   AsyncStorage.getItem('userEmail').then(val => {
-    //     if(val){
-    //       this.setState({ email : val })
-    //     }
-    //   })
-    // }
     componentWillMount(){
       AsyncStorage.getItem('email').then(val => {
         if(val){
@@ -85,10 +59,6 @@ class loginScreen extends React.Component {
         User.password = this.state.password;
         User.username = this.state.username;
         console.log(User.username+ " TESTING")
-
-        // //this stores USERNAME & PASSWORD onto Firebase!! WORKS!!!
-        //firebase.database().ref('Users/' + User.username).set({username: username});
-        // firebase.database().ref('users/' + User.password).set({password: password});
         firebase
           .auth().signInWithEmailAndPassword(this.state.email, this.state.password)
           .then(()=>{
@@ -108,10 +78,6 @@ class loginScreen extends React.Component {
       });
   }//reads signed up user account details
 
-
-
-  /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s 
-      FOR LOGIN AUTHENTICATION = THIS WORKS!!! */
   handleLogin = () => {
     const { email, password, name} = this.state;
     firebase
