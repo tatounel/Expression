@@ -5,6 +5,7 @@ import { StyleSheet, Text, View, Image,
         TouchableOpacity, SafeAreaView, Dimensions } from "react-native";
 import User from '../User';
 import firebase from 'firebase';
+import AwesomeButton from "react-native-really-awesome-button";
 
 export default class HomeScreen extends React.Component{
     static navigationOptions = {
@@ -55,8 +56,15 @@ export default class HomeScreen extends React.Component{
                     keyExtractor={(item) => item.email} 
                 />
 
-                <TouchableOpacity onPress={this.signOut}>
-                    <Text style = {home.logout}> Logout </Text>
+                <TouchableOpacity >
+                    <View style = {home.signout}>
+                        <AwesomeButton
+                            textColor= "#000000"
+                            backgroundColor= "#5ce1e6"
+                            onPress={this.signOut}
+                        >Logout
+                        </AwesomeButton>
+                    </View>
                 </TouchableOpacity>
 
             </SafeAreaView>
@@ -64,6 +72,9 @@ export default class HomeScreen extends React.Component{
     }
 }
 const home = StyleSheet.create({
+    backgrd:{
+        backgroundColor: "#f285b2"
+    },
     container: {
         flex: 1,
         backgroundColor: "#F4F5F7"
@@ -77,10 +88,12 @@ const home = StyleSheet.create({
         left: -120,
         top: -20
     },
-    logout: {
+    signout: {
         textAlign: "center",
         fontSize: 20,
-        color: 'blue'
+        color: 'blue',
+        margin: 20,
+        alignItems: "center",
     },
     welcome: {
         textAlign: "center",
