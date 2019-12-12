@@ -32,69 +32,6 @@ class signUpScreen extends React.Component {
     loading: null
   };
 
-
-  // CHAT APP #latest  https://www.youtube.com/watch?v=_e-5bMYVq7Y
-  // constructor(props){
-  //     super(props);
-  //     this.state = {
-  //       email: "",
-  //       error: false,
-  //       success: false,
-  //       firstName: "",
-  //       lastName: "",
-  //       email: "",
-  //       password: "",
-  //       type: "",
-  //       userName: "",
-  //       errorMessage: null,
-  //       options: ["Artist", "Author"],
-
-  //       password_confirmation: "",
-  //       errors: "",
-  //       loading: false
-  //     };
-  //     firebase.auth().onAuthStateChanged(user => {
-  //       if(user){
-  //         this.getRef()
-  //         .child("friends")
-  //         .push({
-  //           email: user.email,
-  //           uid: user.uid,
-  //           name: this.state.name
-  //         });
-  //         this.props.navigation.navigate("Boiler");
-  //         this.setState({
-  //           loading: false
-  //         });
-  //       }
-  //     });
-  // }
-  // async onRegisterPress(){
-  //   //this.setState({error:"",loading:true});
-  //   const{  email, password, firstName, lastName} = this.state;
-  //   console.log(email);
-  //   console.log(password);
-  //   console.log(firstName);
-  //   console.log(lastName);
-  //   await AsyncStorage.setItem("email", email);
-  //   await AsyncStorage.setItem("password", password);
-  //   await AsyncStorage.setItem("firstName", firstName);
-  //   await AsyncStorage.setItem("lastName", lastName);
-  //   firebase
-  //     .auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
-  //     .then(()=>{
-  //         this.setState({error: "", loading: false});
-  //     })
-  //     .catch(()=>{
-  //       this.setState({error: "Signup Authentication failed.", loading: false})
-  //     });
-  // }
-  // getRef(){
-  //   return firebase.database().ref();
-  // }
-  
-
-
   // saveNewUser = event => {
   //   console.log(`Creating new ${this.state.type}`);
   //   fetch(`http://localhost:8000/api/${this.state.type}s/`, {
@@ -126,33 +63,6 @@ class signUpScreen extends React.Component {
   //       });
   //     });
   // };
-
-  //authentication tutorial from web
-  // SignUp = (email, password) => {
-  //   try {
-  //     firebase
-  //         .auth()
-  //         .createUserWithEmailAndPassword(email, password)
-  //         .then(user => { 
-  //                console.log(user);
-  //          });
-  //   } catch (error) {
-  //     console.log(error.toString(error));
-  //   }
-  // };
-
-  /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
-//   handleSignUp = () => {
-//     firebase
-//         .auth()
-//         .createUserWithEmailAndPassword(this.state.email, this.state.password)
-//         .then(userCredentials => {
-//             return userCredentials.user.updateProfile({
-//                 displayName: this.state.firstName + ' ' + this.state.lastName
-//             });
-//         })
-//         .catch(error => this.setState({ errorMessage: error.message }));
-//   };
 
 /* VER 2 - chat app (Using this one)*/
   handleSignUp = () => {
