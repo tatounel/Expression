@@ -97,22 +97,6 @@ export default class chatScreen extends React.Component {
             this.setState({ textMessage: '' });
         }
     }
-    // sendMessage = async () => {
-    //     if (this.state.textMessage.length > 0) {
-    //         let msgID = firebase.database().ref('messages/Users')
-    //                     .child(this.state.person.username).push().key;
-    //         let updates = {};
-    //         let message = {
-    //             message: this.state.textMessage,
-    //             time: firebase.database.ServerValue.TIMESTAMP,
-    //             from: User.username
-    //         }
-    //         updates[User.username + '/' + this.state.person.username + '/' + msgID] = message;
-    //         updates[this.state.person.username + '/' + User.username + '/' + msgID] = message;
-    //         this.state.dbRef.update(updates);
-    //         this.setState({ textMessage: '' });
-    //     }
-    // }
 
     renderRow = ({ item }) => {
         return (
