@@ -29,7 +29,8 @@ class signUpScreen extends React.Component {
     errorMessage: null,
     options: ["Artist", "Author"],
     errorHandler: "",
-    loading: null
+    loading: null,
+    name: ""
   };
 
   // saveNewUser = event => {
@@ -65,8 +66,17 @@ class signUpScreen extends React.Component {
   // };
 
 /* VER 2 - chat app (Using this one)*/
-  handleSignUp = () => {
+handleSignUp = async() => {
     const { email, password, username, firstName, lastName} = this.state;
+    //copied&pasted from login
+    await AsyncStorage.setItem('email', email);
+    await AsyncStorage.setItem('username', username);
+    await AsyncStorage.setItem('password', password);
+    await AsyncStorage.setItem('name', firstName+ " "+ lastName);
+    User.name = this.state.firstName + " " + this.state.lastName;
+    User.email = this.state.email;
+    User.password = this.state.password;
+    User.username = this.state.username;
     firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email,this.state.password)
