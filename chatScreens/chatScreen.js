@@ -104,7 +104,7 @@ export default class chatScreen extends React.Component {
                 flexDirection: 'row',
                 width: '60%',
                 alignSelf: item.from === User.username ? 'flex-end' : 'flex-start',
-                backgroundColor: item.from === User.username ? '#00897b' : '#7cb342',
+                backgroundColor: item.from === User.username ? '#ea357f' : '#f491ba',
                 borderRadius: 5,
                 marginBottom: 10
             }}>
@@ -133,7 +133,7 @@ export default class chatScreen extends React.Component {
                         placeholder = "Type message..."
                         onChangeText = {this.handleChange('textMessage')} />
                     <TouchableOpacity onPress={this.sendMessage}>
-                        <Text style = {chatstyles.btnText}> Send </Text>
+                        <Text style = {chatstyles.sendB}> Send </Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
@@ -141,15 +141,12 @@ export default class chatScreen extends React.Component {
     }
 }
 
+
 const chatstyles = StyleSheet.create({
     sendB:{
-
     },
     input:{
         width: '85%',
         marginLeft: 10
     },
-    btnText:{
-
-    }
 })
