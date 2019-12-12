@@ -10,7 +10,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import Image from "react-native-scalable-image";
-import RichTextEditor from "react-native-zss-rich-text-editor";
+// import RichTextEditor from "react-native-zss-rich-text-editor";
 
 export default class authorContentScreen extends React.Component {
   render() {
@@ -30,7 +30,7 @@ export default class authorContentScreen extends React.Component {
             backgroundColor="#5ce1e6"
             onPress={() => this.props.navigation.navigate("WritingContent")}
           >
-            Add New
+            <Text>Add New</Text>
           </AwesomeButton>
         </TouchableOpacity>
       </View>

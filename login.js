@@ -91,7 +91,6 @@ class loginScreen extends React.Component {
             source={require("./assets/xpression.png")}
           />
 
-
           <Text>Where Artists and Authors Unite</Text>
 
           <View style={styleLogin.loginContainer}>
@@ -115,7 +114,7 @@ class loginScreen extends React.Component {
               returnKeyType="go"
               secureTextEntry
               style={styleLogin.textInput}
-             //refer to onsubmitediting, this helps move onto the next input
+              //refer to onsubmitediting, this helps move onto the next input
               ref={input => (this.passwordInput = input)}
               //for chatScreen
               value={this.state.password}
@@ -138,7 +137,6 @@ class loginScreen extends React.Component {
               <Text style={styleLogin.error}>{this.state.errorMessage}</Text>
             )}
           </View>
-
         </View>
       </KeyboardAvoidingView>
     );

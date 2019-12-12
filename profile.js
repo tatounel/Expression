@@ -53,14 +53,14 @@ export default class createProfileScreen extends React.Component {
     id: "",
     bio: "",
     usersInterests: "",
-    usersGenresOrStyles: "",
-    photo: null
+    usersGenresOrStyles: ""
   };
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user != null) {
         const { email, password } = user;
         this.setState({ email, password });
+        console.log(email + "got user on profile.js");
       } else {
         console.log("User not created");
       }
@@ -96,7 +96,7 @@ export default class createProfileScreen extends React.Component {
   //logout Button
   logOut = async () => {
     await AsyncStorage.clear();
-    this.props.navigation.navigate("Auth");
+    this.props.navigation.navigate("Welcome");
   };
 
   getUserByEmail = () => {
@@ -119,7 +119,7 @@ export default class createProfileScreen extends React.Component {
         this.setState({
           success: true
         });
-        //console.log(authors);
+        console.log(authorsOrArtists);
         let currentUser = null;
         authorsOrArtists.filter(authorOrArtist => {
           let obj = authorOrArtist;
@@ -387,7 +387,11 @@ export default class createProfileScreen extends React.Component {
                   textColor="#000000"
                   backgroundColor="#5ce1e6"
                   onPress={() => {
+                    console.log("button pressed in profile");
                     this.updateUser().then(() => {
+                      console.log(
+                        "update user function has been called, now going to display profile"
+                      );
                       this.props.navigation.navigate("DisplayProfile", {
                         id: this.state.id,
                         type: this.type
@@ -460,6 +464,10 @@ const styleCreateProfile = StyleSheet.create({
     borderWidth: 1
   },
 
+  editProfileButton: {
+    alignItems: "center",
+    textAlign: "right"
+  },
 
   textContainer: {
     padding: 20

@@ -35,7 +35,9 @@ export default class signUpScreen extends React.Component {
     lastName: "",
     email: "",
     type: "",
-    options: ["Artist", "Author"]
+    options: ["Artist", "Author"],
+    password: "",
+    errorMessage: null
   };
 
   signOut = () => {
@@ -87,7 +89,6 @@ export default class signUpScreen extends React.Component {
       });
   };
 
-
   /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
 
   render() {
@@ -112,9 +113,7 @@ export default class signUpScreen extends React.Component {
               autoCapitalize="none"
               autoCorrect={false}
               style={styleSignUp.textInputs2}
-              onChangeText={firstName =>
-                this.setState({ firstName: firstName })
-              }
+              onChangeText={firstName => this.setState({ firstName })}
               value={this.state.firstName}
             />
 
@@ -126,7 +125,7 @@ export default class signUpScreen extends React.Component {
               onSubmitEditing={() => this.eMail.focus()}
               style={styleSignUp.textInputs2}
               ref={input => (this.lastName = input)}
-              onChangeText={lastName => this.setState({ lastName: lastName })}
+              onChangeText={lastName => this.setState({ lastName })}
               value={this.state.lastName}
             />
           </View>
@@ -141,7 +140,7 @@ export default class signUpScreen extends React.Component {
               keyboardType="email-address"
               style={styleSignUp.textInputs}
               ref={input => (this.eMail = input)}
-              onChangeText={email => this.setState({ email: email })}
+              onChangeText={email => this.setState({ email })}
               value={this.state.email}
             />
 
@@ -169,7 +168,6 @@ export default class signUpScreen extends React.Component {
               height: 70,
               Width: "40%"
             }}
-
             onSelect={type =>
               this.setState({ type: `${this.state.options[type]}` })
             }

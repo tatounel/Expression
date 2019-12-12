@@ -16,7 +16,7 @@ import matchScreen from "./findingmatch";
 //Calling in the files for it to stack and work as a moving screen
 
 import LoadingScreen from "./chatScreens/LoadingScreen";
-import * as firebase from "firebase";
+import firebase from "firebase";
 // Web app's Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyAO19aZCQkjfLSIuMdLx1hiLcaLTrioVQ0",

@@ -197,7 +197,7 @@ export default class profileDisplayScreen extends React.Component {
                 backgroundColor="#5ce1e6"
                 onPress={() => this.props.navigation.navigate("MatchContent")}
               >
-               <Text>Find A Match</Text>
+                <Text>Find A Match</Text>
               </AwesomeButton>
             </View>
           </TouchableOpacity>

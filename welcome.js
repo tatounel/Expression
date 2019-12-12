@@ -12,6 +12,12 @@ import Image from "react-native-scalable-image";
 //built a class that includes the touchability to move forward to the next page for each button
 
 class WelcomeScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: "Welcome"
+    };
+  };
+
   render() {
     return (
       <View style={styleWelcome.container}>
@@ -31,7 +37,7 @@ class WelcomeScreen extends React.Component {
               backgroundColor="#5ce1e6"
               onPress={() => this.props.navigation.navigate("Login")}
             >
-              Log In
+              <Text>Log In</Text>
             </AwesomeButton>
           </View>
 
@@ -43,7 +49,7 @@ class WelcomeScreen extends React.Component {
               backgroundColor="#5ce1e6"
               onPress={() => this.props.navigation.navigate("Signup")}
             >
-              Sign Up
+              <Text>Sign Up</Text>
             </AwesomeButton>
           </View>
         </TouchableOpacity>

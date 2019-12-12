@@ -1,6 +1,12 @@
 import React from "react";
 import AwesomeButton from "react-native-really-awesome-button";
-import { StyleSheet, View, Dimensions, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  Text
+} from "react-native";
 import Image from "react-native-scalable-image";
 
 class matchScreen extends React.Component {
@@ -20,7 +26,7 @@ class matchScreen extends React.Component {
               backgroundColor="#5ce1e6"
               onPress={() => this.props.navigation.navigate("null")}
             >
-              XPression
+              <Text>XPressions</Text>
             </AwesomeButton>
           </View>
 
@@ -31,7 +37,7 @@ class matchScreen extends React.Component {
               backgroundColor="#5ce1e6"
               onPress={() => this.props.navigation.navigate("null")}
             >
-              Message
+              <Text>Message</Text>
             </AwesomeButton>
           </View>
         </TouchableOpacity>
@@ -44,7 +50,7 @@ class matchScreen extends React.Component {
               backgroundColor="#5ce1e6"
               onPress={() => this.props.navigation.navigate("null")}
             >
-              Accept
+              <Text>Accept</Text>
             </AwesomeButton>
           </View>
 
@@ -55,7 +61,7 @@ class matchScreen extends React.Component {
               backgroundColor="#5ce1e6"
               onPress={() => this.props.navigation.navigate("null")}
             >
-              Deny
+              <Text>Deny</Text>
             </AwesomeButton>
           </View>
         </TouchableOpacity>
