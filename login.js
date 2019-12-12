@@ -58,11 +58,11 @@ class loginScreen extends React.Component {
         User.email = this.state.email;
         User.password = this.state.password;
         User.username = this.state.username;
-        console.log(User.username+ " TESTING")
+        //console.log(User.username+ " TESTING")
         firebase
           .auth().signInWithEmailAndPassword(this.state.email, this.state.password)
           .then(()=>{
-            this.readUserData();
+            //this.readUserData();
             //WORKS FOR A SIGNED'UP ACC
             this.props.nagivation.navigate('App');
             this.setState({error: "", loading: false});
