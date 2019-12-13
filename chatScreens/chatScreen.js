@@ -1,42 +1,63 @@
 import React from "react";
-import {
-    Platform, AsyncStorage,
-    KeyboardAvoidingView,
-    SafeAreaView, Text, TextInput,
-    TouchableOpacity, StyleSheet,
-    Dimensions, View } from "react-native";
+import { View, Text, TextInput, Platform, 
+        Animated, StyleSheet, Dimensions,
+        KeyboardAvoidingView, SafeAreaView, 
+        AsyncStorage, TouchableOpacity } from "react-native";
 //import { GiftedChat } from "react-native-gifted-chat";
 import firebase from "firebase";
-import User from "./User"
+import User from "../User"
 import { FlatList } from "react-native-gesture-handler";
+import { StackGestureContext } from "react-navigation-stack";
 
-class chatScreen extends React.Component {
+export default class chatScreen extends React.Component {
 
-    static navigationOptions = ({ navigation }) => ({
-        title: navigation.getParam('name', null)
-    });
+    static navigationOptions = ({ navigation }) => {
+        return{
+            title: navigation.getParam('username', null)
+        }
+    }
 
     constructor(props) {
         super(props);
         this.state = {
             person: {
-                name: props.navigation.getParam('name'),
+                username: props.navigation.getParam('username'),
                 email: props.navigation.getParam('email')
             },
-            messages: ''
+            textMessage: '',
+            messageList: [],
+            dbRef: firebase.database().ref('messages')
         }
+        this.keyboardHeight = new Animated.Value(0);
+        this.bottomPadding = new Animated.Value(60);
     }
+    //ONLY WORKS ON LOGIN!
+    componentDidMount(){
+        firebase.database().ref('messages').child(User.username).child(this.state.person.username)
+            .on('child_added', (value) => {
+                this.setState( (prevState) => {
 
-    componentWillMount(){
-        firebase.database().ref('messages').child(User.email).child(this.state.person.email)
-            .on('child_add', (value)=>{
-                this.setState((prevState)=>{
                     return {
                         messageList: [...prevState.messageList, value.val()]
                     }
                 })
             })
     }
+    // componentDidMount(){
+    //     firebase.database().ref('messages/Users').child(this.state.person.username)
+    //         .on('child_added', (value) => {
+    //             this.setState( (prevState) => {
+    //                 return {
+    //                     messageList: [...prevState.messageList, value.val()]
+    //                 }
+    //             })
+    //         })
+    // }
+
+    componentWillUnmount(){
+        this.state.dbRef.off()
+    }
+
 
     handleChange = key => val => {
         this.setState({ [key]: val })
@@ -46,8 +67,9 @@ class chatScreen extends React.Component {
     convertTime = (time) => {
         let date = new Date(time);
         let day = new Date();
-        let result = ( date.getHours() < 10 ? '0' : '' ) + d.getHours() + ':';
-        result += ( d.getMinutes() < 10 ? '0' : '' ) + d.getMinutes();
+        let result = ( date.getHours() < 10 ? '0' : '' ) + date.getHours() + ':';
+        result += ( date.getMinutes() < 10 ? '0' : '' ) + date.getMinutes();
+
         //12 hour timeframe
         if(result < 12){
             result += ' AM';
@@ -64,114 +86,87 @@ class chatScreen extends React.Component {
     }
 
     sendMessage = async () => {
-        if (this.state.messages.length > 0) {
-            let msgID = firebase.database().ref('messages').child(User.name).child(this.state.person.name).push().key;
+        if (this.state.textMessage.length > 0) {
+            let msgID = firebase.database().ref('messages').child(User.username)
+                        .child(this.state.person.username).push().key;
             let updates = {};
             let message = {
-                message: this.state.messages,
+                message: this.state.textMessage,
                 time: firebase.database.ServerValue.TIMESTAMP,
-                from: User.email
+                from: User.username
             }
-            updates['messages/' + User.email + '/' + this.state.person.email + '/' + msgID] = message;
-            updates['messages/' + this.state.person.email + '/' + User.email + '/' + msgID] = message;
-            firebase.database().ref().update(updates);
-            this.setState({ messages: '' });
+            updates[User.username + '/' + this.state.person.username + '/' + msgID] = message;
+            updates[this.state.person.username + '/' + User.username + '/' + msgID] = message;
+            this.state.dbRef.update(updates);
+            this.setState({ textMessage: '' });
         }
     }
-
-    //old chat
-    get user() {
-        return {
-            name: this.props.navigation.state.params.name,
-            _id: Fire.uid
-        };
-    }
-
-    //old chat
-    componentDidMount() {
-        Fire.get(message =>
-            this.setState(previousState => ({
-                messages: GiftedChat.append(previousState.messages, message)
-            }))
-        );
-    }
-
-    //old chat
-    componentWillUnmount() {
-        Fire.off();
-    }
-
-    // render() {
-    //     const chat = < GiftedChat messages = {this.state.messages} 
-    //                                 onSend = {Fire.send} 
-    //                                 user = {this.user} />;
-    //     if (Platform.OS === "android") {
-    //         return (
-    //             <KeyboardAvoidingView style={{ flex: 1 }} 
-    //                                     behavior = "padding" 
-    //                                     keyboardVerticalOffset = {30} 
-    //                                     enabled> {chat}
-    //             </KeyboardAvoidingView>
-    //         );
+    // sendMessage = async () => {
+    //     if (this.state.textMessage.length > 0) {
+    //         let msgID = firebase.database().ref('messages/Users')
+    //                     .child(this.state.person.username).push().key;
+    //         let updates = {};
+    //         let message = {
+    //             message: this.state.textMessage,
+    //             time: firebase.database.ServerValue.TIMESTAMP,
+    //             from: User.username
+    //         }
+    //         updates[User.username + '/' + this.state.person.username + '/' + msgID] = message;
+    //         updates[this.state.person.username + '/' + User.username + '/' + msgID] = message;
+    //         this.state.dbRef.update(updates);
+    //         this.setState({ textMessage: '' });
     //     }
-    //     return <SafeAreaView style = {{ flex: 1 }}> {chat} </SafeAreaView>;
-    // }//closes render()
+    // }
 
     renderRow = ({ item }) => {
         return (
-            <View style={{
+            <View style = { {
                 flexDirection: 'row',
                 width: '60%',
-                alignSelf: item.from === User.email ? 'flex-end' : 'flex-start',
-                backgroundColor: item.from === User.email ? '#00897b' : '#7cb342',
+                alignSelf: item.from === User.username ? 'flex-end' : 'flex-start',
+                backgroundColor: item.from === User.username ? '#ea357f' : '#f491ba',
                 borderRadius: 5,
                 marginBottom: 10
             }}>
-
-            <Text style={{color: '#fff', padding: 7, fontSize: 16}}>
-                {item.message}
-            </Text>
-
-            <Text style={{ color:'#eee', padding:3, fontSize:12 }}>
-                {this.convertTime(item.time)}
-            </Text>
-
+                <Text style={{color: '#FFF', padding: 7, fontSize: 16}}>
+                    {item.message}
+                </Text>
+                <Text style={{ color:'#EEE', padding:3, fontSize:12 }}>
+                    {this.convertTime(item.time)}
+                </Text>
             </View>
         )
     }
-
-    render() {
+    render(){
         let {height, weight} = Dimensions.get('window');
-        return (
-            <SafeAreaView>
-                <FlatList style={{padding:10, height: height * 0.8}}
-                    data={this.state.messages}
-                    renderItem={this.renderRow}
-                    KeyExtractor={(item, index) => index.toString()} />
-
-                <View style={{flexDirection: 'row', alignItems: 'center', marginHorizontal: 5}}>
-                <TextInput
-                    style={chatstyles.inputs}
-                    value={this.state.messages}
-                    placeholder="Type message..."
-                    onChangeText={this.handleChange('messages')}  />
-
-                <TouchableOpacity onPress={this.sendMessage}
-                    style={{paddingBottom: 10, marginLeft:5}}>
-                    <Text style={chatstyles.sendB}> Send </Text>
-                </TouchableOpacity>
+        return(
+            <KeyboardAvoidingView>
+                <FlatList 
+                    style = { {padding:10, height: height * 0.8} } 
+                    data = {this.state.messageList}
+                    renderItem = {this.renderRow} 
+                    keyExtractor = { (item, index) => index.toString() } />
+                <View style = { { flexDirection: 'row', alignItems: 'center'} }>
+                    <TextInput 
+                        style = {chatstyles.input}
+                        value = {this.state.textMessage}
+                        placeholder = "Type message..."
+                        onChangeText = {this.handleChange('textMessage')} />
+                    <TouchableOpacity onPress={this.sendMessage}>
+                        <Text style = {chatstyles.sendB}> Send </Text>
+                    </TouchableOpacity>
                 </View>
+            </KeyboardAvoidingView>
 
-
-            </SafeAreaView>
         )
     }
 }
 
-export default chatScreen;
-
 const chatstyles = StyleSheet.create({
     sendB:{
-
-    }
+    },
+    input:{
+        width: '85%',
+        marginLeft: 10
+    },
 })
