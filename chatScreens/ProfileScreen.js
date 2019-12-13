@@ -21,7 +21,6 @@ export default class ProfileScreen extends React.Component {
         }
       }
       
-  /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
     state = {
         email:"",
         password: "",
