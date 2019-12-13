@@ -134,6 +134,7 @@ export default class signUpScreen extends React.Component {
             <TextInput
               id="emailing"
               placeholder="E-Mail"
+              autoCapitalize="none"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
               onSubmitEditing={() => this.passwordInput.focus()}
@@ -179,7 +180,7 @@ export default class signUpScreen extends React.Component {
           <View style={styleSignUp.onebutton}>
             <AwesomeButton
               progress={true}
-              progressLoadingTime={10000}
+              progressLoadingTime={3000}
               width={100}
               textColor="#000000"
               backgroundColor="#5ce1e6"
@@ -223,6 +224,7 @@ const styleSignUp = StyleSheet.create({
     marginBottom: 10,
     color: "#FFF",
     paddingHorizontal: 103,
+    marginRight: 1,
     borderWidth: 1
   },
 
@@ -247,14 +249,6 @@ const styleSignUp = StyleSheet.create({
     alignItems: "center"
   },
 
-  textInputs2: {
-    height: 40,
-    backgroundColor: "rgba(255,255,255,0.2)",
-    marginBottom: 10,
-    color: "#FFF",
-    paddingHorizontal: 33.5,
-    marginRight: 1
-  },
   selectionType: {
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 10,
