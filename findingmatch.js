@@ -5,9 +5,9 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
-  Text
+  Text,
+  Image
 } from "react-native";
-import Image from "react-native-scalable-image";
 import WMA from "wma-matching-algorithm";
 
 class matchScreen extends React.Component {
@@ -33,7 +33,10 @@ class matchScreen extends React.Component {
       email: "",
       password: "",
       id: "",
+      name: "",
       bio: "",
+      genreOrStyle: "",
+      interests: "",
       usersInterests: "",
       matchGenresOrStyles: "",
       data: null,
@@ -47,7 +50,8 @@ class matchScreen extends React.Component {
         return this.findAllTypeUsers();
       })
       .then(() => {
-        this.init(this.state.data);
+        // this.init(this.state.data);
+        this.findUserMatch();
       });
   }
 
@@ -66,15 +70,15 @@ class matchScreen extends React.Component {
       ]
     });
     console.log(this.state.matchOne);
-    wma
-      .match(this.state.matchOne)
-      .then(response => {
-        console.log(response.json());
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    console.log("Above is match output");
+    // wma
+    //   .match(this.state.matchOne)
+    //   .then(response => {
+    //     console.log(response.json());
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    // console.log("Above is match output");
   };
 
   getCurrentUserInfo = async () => {
@@ -176,6 +180,41 @@ class matchScreen extends React.Component {
       });
   };
 
+  findUserMatch = () => {
+    let defaultId = 3;
+    return fetch(
+      `http://localhost:8000/api/${this.oppositeType}s/${defaultId}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(res => {
+        console.log(`Got match 4`);
+        if (res.ok) {
+          return res.json();
+        }
+        throw new Error("Content validation");
+      })
+      .then(artistOrAuthor => {
+        this.setState({
+          success: true,
+          name: artistOrAuthor.name,
+          bio: artistOrAuthor.bio,
+          genreOrStyle: artistOrAuthor[`${this.interests.slice(0, -1)}`],
+          interests: artistOrAuthor.interests
+        });
+      })
+      .catch(err => {
+        this.setState({
+          error: true
+        });
+      });
+  };
+
   render() {
     return (
       <View style={matchStyleSheet.container}>
@@ -183,7 +222,10 @@ class matchScreen extends React.Component {
           style={{ width: 300, height: 200, resizeMode: "contain" }}
           source={require("./assets/findmatch.png")}
         />
-
+        <Text>Name: {this.state.name}</Text>
+        <Text>Bio: {this.state.bio}</Text>
+        <Text>Genre or Style: {this.state.genreOrStyle}</Text>
+        <Text>Interests: {this.state.interests}</Text>
         <View style={matchStyleSheet.buttonContainer}>
           <View style={matchStyleSheet.shiftButton}>
             <AwesomeButton

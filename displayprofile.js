@@ -156,7 +156,7 @@ export default class profileDisplayScreen extends React.Component {
             style={{ width: 300, height: 200, resizeMode: "contain" }}
             source={require("./assets/faceicon.png")}
           />
-          <Text>Upload Your First Image</Text>
+          {/* <Text>Upload Your First Image</Text> */}
           {/* <MultipleTags
             tags={this.state.genreOrStyle}
             // search
@@ -216,17 +216,17 @@ export default class profileDisplayScreen extends React.Component {
             </View>
           </View>
 
-            <AwesomeButton
-              textColor="#000000"
-              width={120}
-              backgroundColor="#5ce1e6"
-              onPress={() => {
-                this.signOut();
-                this.props.navigation.navigate("Welcome");
-              }}
-            >
-              <Text>Logout</Text>
-            </AwesomeButton>
+          <AwesomeButton
+            textColor="#000000"
+            width={120}
+            backgroundColor="#5ce1e6"
+            onPress={() => {
+              this.signOut();
+              this.props.navigation.navigate("Welcome");
+            }}
+          >
+            <Text>Logout</Text>
+          </AwesomeButton>
         </View>
       </KeyboardAvoidingView>
     );

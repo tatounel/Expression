@@ -8,13 +8,13 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  SafeAreaView,
-  Image
+  SafeAreaView
 } from "react-native";
 import MultiSelect from "react-native-multiple-select";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import * as firebase from "firebase";
+import Image from "react-native-scalable-image";
 
 import Constants from "expo-constants";
 
@@ -324,10 +324,9 @@ export default class createProfileScreen extends React.Component {
                     source={{ uri: photo }}
                   />
                 )}
-              </View>
-              <View style={styleCreateProfile.photoTxt}>
                 <Text>Upload photo</Text>
               </View>
+              <View style={styleCreateProfile.photoTxt}></View>
             </TouchableOpacity>
 
             <View style={styleCreateProfile.textContainer}>
@@ -415,25 +414,6 @@ export default class createProfileScreen extends React.Component {
                 }}
               >
                 <Text>Next</Text>
-              </AwesomeButton>
-
-              <AwesomeButton
-                progress={true}
-                progressLoadingTime={3000}
-                width={100}
-                textColor="#000000"
-                backgroundColor="#5ce1e6"
-                alignItems="center"
-                onPress={() => {
-                  this.updateUser().then(() => {
-                    this.props.navigation.navigate("DisplayProfile", {
-                      id: this.state.id,
-                      type: this.type
-                    });
-                  });
-                }}
-              >
-                <Text>Logout</Text>
               </AwesomeButton>
             </View>
 
