@@ -3,14 +3,12 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  Dimensions,
   View,
   KeyboardAvoidingView,
   StatusBar,
-  TouchableOpacity
+  Image
 } from "react-native";
 import AwesomeButton from "react-native-really-awesome-button";
-import Image from "react-native-scalable-image";
 //Built a login that includes inputs of each placeholder needed to be filled out
 //import firebase from "firebase";
 import User from "./chatScreens/User";
@@ -87,10 +85,9 @@ class loginScreen extends React.Component {
           <Text>Welcome To</Text>
 
           <Image
-            width={Dimensions.get("window").width}
+            style={{ width: 300, height: 200, resizeMode: "contain" }}
             source={require("./assets/xpression.png")}
           />
-
 
           <Text>Where Artists and Authors Unite</Text>
 
@@ -115,7 +112,7 @@ class loginScreen extends React.Component {
               returnKeyType="go"
               secureTextEntry
               style={styleLogin.textInput}
-             //refer to onsubmitediting, this helps move onto the next input
+              //refer to onsubmitediting, this helps move onto the next input
               ref={input => (this.passwordInput = input)}
               //for chatScreen
               value={this.state.password}
@@ -138,7 +135,6 @@ class loginScreen extends React.Component {
               <Text style={styleLogin.error}>{this.state.errorMessage}</Text>
             )}
           </View>
-
         </View>
       </KeyboardAvoidingView>
     );

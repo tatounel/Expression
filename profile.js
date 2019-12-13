@@ -8,10 +8,9 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  Picker,
-  SafeAreaView
+  SafeAreaView,
+  Image
 } from "react-native";
-import Image from "react-native-scalable-image";
 import MultiSelect from "react-native-multiple-select";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
@@ -299,7 +298,7 @@ export default class createProfileScreen extends React.Component {
         >
           <View style={styleCreateProfile.container}>
             <Image
-              width={Dimensions.get("window").width}
+              style={{ width: 300, height: 200, resizeMode: "contain" }}
               source={require("./assets/profile.png")}
             />
             <TouchableOpacity onPress={this._pickImage}>
@@ -381,37 +380,35 @@ export default class createProfileScreen extends React.Component {
               />
             </View>
 
-            <TouchableOpacity>
-              <View style={styleCreateProfile.editProfileButton}>
-                <AwesomeButton
-                  textColor="#000000"
-                  backgroundColor="#5ce1e6"
-                  onPress={() => {
-                    this.updateUser().then(() => {
-                      this.props.navigation.navigate("DisplayProfile", {
-                        id: this.state.id,
-                        type: this.type
-                      });
-                    });
-                  }}
-                >
-                  <Text>Next</Text>
-                </AwesomeButton>
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity>
+            <View style={styleCreateProfile.editProfileButton}>
               <AwesomeButton
+                width={80}
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
                 onPress={() => {
-                  this.signOut();
-                  this.props.navigation.navigate("Welcome");
+                  this.updateUser().then(() => {
+                    this.props.navigation.navigate("DisplayProfile", {
+                      id: this.state.id,
+                      type: this.type
+                    });
+                  });
                 }}
               >
-                <Text style={styleCreateProfile.editProfileButton}>Logout</Text>
+                <Text>Next</Text>
               </AwesomeButton>
-            </TouchableOpacity>
+            </View>
+
+            <AwesomeButton
+              width={80}
+              textColor="#000000"
+              backgroundColor="#5ce1e6"
+              onPress={() => {
+                this.signOut();
+                this.props.navigation.navigate("Welcome");
+              }}
+            >
+              <Text style={styleCreateProfile.editProfileButton}>Logout</Text>
+            </AwesomeButton>
           </View>
         </KeyboardAvoidingView>
       </SafeAreaView>
@@ -459,7 +456,6 @@ const styleCreateProfile = StyleSheet.create({
     paddingHorizontal: 70,
     borderWidth: 1
   },
-
 
   textContainer: {
     padding: 20
