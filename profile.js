@@ -393,30 +393,29 @@ export default class createProfileScreen extends React.Component {
               />
             </View>
 
-              <View style={styleCreateProfile.editProfileButton}>
-                <AwesomeButton
-                  progress={true}
-                  progressLoadingTime={3000}
-                  width={100}
-                  textColor="#000000"
-                  backgroundColor="#5ce1e6"
-                  alignItems="center"
-                  onPress={() => {
-                    console.log("button pressed in profile");
-                    this.updateUser().then(() => {
-                      console.log(
-                        "update user function has been called, now going to display profile"
-                      );
-                      this.props.navigation.navigate("DisplayProfile", {
-                        id: this.state.id,
-                        type: this.type
-                      });
+            <View style={styleCreateProfile.editProfileButton}>
+              <AwesomeButton
+                progress={true}
+                progressLoadingTime={3000}
+                width={100}
+                textColor="#000000"
+                backgroundColor="#5ce1e6"
+                alignItems="center"
+                onPress={() => {
+                  console.log("button pressed in profile");
+                  this.updateUser().then(() => {
+                    console.log(
+                      "update user function has been called, now going to display profile"
+                    );
+                    this.props.navigation.navigate("DisplayProfile", {
+                      id: this.state.id,
+                      type: this.type
                     });
-                  }}
-                >
-                  <Text>Next</Text>
-                </AwesomeButton>
-              </View>
+                  });
+                }}
+              >
+                <Text>Next</Text>
+              </AwesomeButton>
 
               <AwesomeButton
                 progress={true}
