@@ -180,11 +180,11 @@ class matchScreen extends React.Component {
     return (
       <View style={matchStyleSheet.container}>
         <Image
-          width={Dimensions.get("window").width}
+          style={{ width: 300, height: 200, resizeMode: "contain" }}
           source={require("./assets/findmatch.png")}
         />
 
-        <TouchableOpacity style={matchStyleSheet.buttonContainer}>
+        <View style={matchStyleSheet.buttonContainer}>
           <View style={matchStyleSheet.shiftButton}>
             <AwesomeButton
               width={90}
@@ -206,9 +206,9 @@ class matchScreen extends React.Component {
               <Text>Message</Text>
             </AwesomeButton>
           </View>
-        </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity style={matchStyleSheet.buttonContainer}>
+        <View style={matchStyleSheet.buttonContainer}>
           <View style={matchStyleSheet.shiftButton}>
             <AwesomeButton
               width={90}
@@ -230,7 +230,7 @@ class matchScreen extends React.Component {
               <Text>Deny</Text>
             </AwesomeButton>
           </View>
-        </TouchableOpacity>
+        </View>
       </View>
     );
   }

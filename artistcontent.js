@@ -1,17 +1,9 @@
 import React from "react";
 import AwesomeButton from "react-native-really-awesome-button";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  TouchableOpacity,
-  ScrollView
-} from "react-native";
+import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
-import Image from "react-native-scalable-image";
 
 export default class artistContentScreen extends React.Component {
   state = {
@@ -22,7 +14,7 @@ export default class artistContentScreen extends React.Component {
     return (
       <View style={styleArtist.Container}>
         <Image
-          width={Dimensions.get("window").width}
+          style={{ width: 300, height: 200, resizeMode: "contain" }}
           source={require("./assets/xpress.png")}
         />
         <ScrollView>
@@ -33,15 +25,14 @@ export default class artistContentScreen extends React.Component {
           </View>
         </ScrollView>
 
-        <TouchableOpacity>
-          <AwesomeButton
-            textColor="#000000"
-            backgroundColor="#5ce1e6"
-            onPress={this._pickImage}
-          >
-            <Text>Add New</Text>
-          </AwesomeButton>
-        </TouchableOpacity>
+        <AwesomeButton
+          width={70}
+          textColor="#000000"
+          backgroundColor="#5ce1e6"
+          onPress={this._pickImage}
+        >
+          <Text>Add New</Text>
+        </AwesomeButton>
       </View>
     );
   }

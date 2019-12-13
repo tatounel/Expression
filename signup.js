@@ -4,18 +4,13 @@ import {
   Text,
   TextInput,
   View,
-  Dimensions,
   KeyboardAvoidingView,
   StatusBar,
-  TouchableOpacity,
-  TouchableWithoutFeedback
+  Image
 } from "react-native";
 import AwesomeButton from "react-native-really-awesome-button";
-import Image from "react-native-scalable-image";
 import ModalDropDown from "react-native-modal-dropdown";
 
-//import RNPickerSelect from "react-native-picker-select";
-//import TypeOfHobby from './selectionView';
 import * as firebase from "firebase";
 
 //Built a signup screen that includes text inputs of each placeholder. with no auto Cap and no auto correcting. Making sure everytime
@@ -98,7 +93,7 @@ export default class signUpScreen extends React.Component {
           <StatusBar barStyle="light-content" />
           <Text>Welcome To</Text>
           <Image
-            width={Dimensions.get("window").width}
+            style={{ width: 300, height: 200, resizeMode: "contain" }}
             source={require("./assets/xpression.png")}
           />
           <Text>Where Artists and Authors Unite</Text>
@@ -106,6 +101,7 @@ export default class signUpScreen extends React.Component {
           <View style={styleSignUp.rowContainer}>
             <TextInput
               id="fName"
+              borderWidth={1}
               placeholder="First Name"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
@@ -119,10 +115,13 @@ export default class signUpScreen extends React.Component {
 
             <TextInput
               id="LName"
+              borderWidth={1}
               placeholder="Last Name"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
               onSubmitEditing={() => this.eMail.focus()}
+              autoCapitalize="none"
+              autoCorrect={false}
               style={styleSignUp.textInputs2}
               ref={input => (this.lastName = input)}
               onChangeText={lastName => this.setState({ lastName })}
@@ -138,6 +137,8 @@ export default class signUpScreen extends React.Component {
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
               onSubmitEditing={() => this.passwordInput.focus()}
+              autoCapitalize="none"
+              autoCorrect={false}
               keyboardType="email-address"
               style={styleSignUp.textInputs}
               ref={input => (this.eMail = input)}
@@ -149,7 +150,6 @@ export default class signUpScreen extends React.Component {
               placeholder="Password"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
-              onSubmitEditing={() => this.artistInput.focus()}
               secureTextEntry
               style={styleSignUp.textInputs}
               ref={input => (this.passwordInput = input)}
@@ -176,31 +176,29 @@ export default class signUpScreen extends React.Component {
           />
         </View>
 
-        <TouchableOpacity>
-          <View style={styleSignUp.onebutton}>
-            <AwesomeButton
-              progress={true}
-              progressLoadingTime={3000}
-              width={100}
-              textColor="#000000"
-              backgroundColor="#5ce1e6"
-              alignItems="center"
-              onPress={() => {
-                this.handleSignUp()
-                  .then(() => {
-                    return this.saveNewUser();
-                  })
-                  .then(() => {
-                    this.props.navigation.navigate("EditProfile", {
-                      type: this.state.type
-                    });
+        <View style={styleSignUp.onebutton}>
+          <AwesomeButton
+            progress={true}
+            progressLoadingTime={3000}
+            width={100}
+            textColor="#000000"
+            backgroundColor="#5ce1e6"
+            alignItems="center"
+            onPress={() => {
+              this.handleSignUp()
+                .then(() => {
+                  return this.saveNewUser();
+                })
+                .then(() => {
+                  this.props.navigation.navigate("EditProfile", {
+                    type: this.state.type
                   });
-              }}
-            >
-              <Text>Register</Text>
-            </AwesomeButton>
-          </View>
-        </TouchableOpacity>
+                });
+            }}
+          >
+            <Text>Register</Text>
+          </AwesomeButton>
+        </View>
       </KeyboardAvoidingView>
     );
   }
@@ -234,8 +232,7 @@ const styleSignUp = StyleSheet.create({
     marginBottom: 10,
     color: "#FFF",
     paddingHorizontal: 33.5,
-    marginRight: 1,
-    borderWidth: 1
+    marginRight: 1
   },
 
   onebutton: {

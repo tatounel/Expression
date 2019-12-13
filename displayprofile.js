@@ -4,14 +4,12 @@ import {
   Text,
   View,
   StyleSheet,
-  BackHandler,
   TouchableOpacity,
   KeyboardAvoidingView,
-  SafeAreaView,
+  Image,
   AsyncStorage
 } from "react-native";
-import Image from "react-native-scalable-image";
-import MultipleTags from "react-native-multiple-tags";
+//import MultipleTags from "react-native-multiple-tags";
 
 import User from "./chatScreens/User";
 import * as firebase from "firebase";
@@ -155,9 +153,8 @@ export default class profileDisplayScreen extends React.Component {
         <View style={styleDisplayProfile.container}>
           <Text>Welcome back!</Text>
           <Image
-            width={200}
+            style={{ width: 300, height: 200, resizeMode: "contain" }}
             source={require("./assets/faceicon.png")}
-            style={styleDisplayProfile.facePic}
           />
           <Text>Upload Your First Image</Text>
           {/* <MultipleTags
@@ -180,7 +177,7 @@ export default class profileDisplayScreen extends React.Component {
           <Text>Genre or Style: {this.state.genreOrStyle}</Text>
           <Text>Interests: {this.state.interests}</Text>
 
-          <TouchableOpacity style={styleDisplayProfile.buttonPosition}>
+          <View style={styleDisplayProfile.buttonPosition}>
             <View style={styleDisplayProfile.onebuttonPosition}>
               <AwesomeButton
                 width={120}
@@ -217,9 +214,8 @@ export default class profileDisplayScreen extends React.Component {
                 <Text>Find A Match</Text>
               </AwesomeButton>
             </View>
-          </TouchableOpacity>
+          </View>
 
-          <TouchableOpacity>
             <AwesomeButton
               textColor="#000000"
               width={120}
@@ -231,7 +227,6 @@ export default class profileDisplayScreen extends React.Component {
             >
               <Text>Logout</Text>
             </AwesomeButton>
-          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     );

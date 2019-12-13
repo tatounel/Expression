@@ -12,7 +12,6 @@ import artistContentScreen from "./artistcontent";
 import authorContentScreen from "./authorcontent";
 import writingContentScreen from "./writingcontent";
 import matchScreen from "./findingmatch";
-
 //Calling in the files for it to stack and work as a moving screen
 
 import LoadingScreen from "./chatScreens/LoadingScreen";
