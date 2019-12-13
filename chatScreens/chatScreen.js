@@ -36,6 +36,7 @@ export default class chatScreen extends React.Component {
         firebase.database().ref('messages').child(User.username).child(this.state.person.username)
             .on('child_added', (value) => {
                 this.setState( (prevState) => {
+
                     return {
                         messageList: [...prevState.messageList, value.val()]
                     }
@@ -57,6 +58,7 @@ export default class chatScreen extends React.Component {
         this.state.dbRef.off()
     }
 
+
     handleChange = key => val => {
         this.setState({ [key]: val })
     }
@@ -67,6 +69,7 @@ export default class chatScreen extends React.Component {
         let day = new Date();
         let result = ( date.getHours() < 10 ? '0' : '' ) + date.getHours() + ':';
         result += ( date.getMinutes() < 10 ? '0' : '' ) + date.getMinutes();
+
         //12 hour timeframe
         if(result < 12){
             result += ' AM';
@@ -154,6 +157,7 @@ export default class chatScreen extends React.Component {
                     </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
+
         )
     }
 }

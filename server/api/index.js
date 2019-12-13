@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 8000;
 
 // this lets us parse 'application/json' content in http requests
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 
 // add http request logging to help us debug and audit app use
 const logFormat = process.env.NODE_ENV === "production" ? "combined" : "dev";
