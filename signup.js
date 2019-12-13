@@ -4,19 +4,27 @@ import {
   Text,
   TextInput,
   View,
-  Dimensions,
   KeyboardAvoidingView,
   StatusBar,
-  TouchableOpacity
+  Image
 } from "react-native";
 import AwesomeButton from "react-native-really-awesome-button";
-import Image from "react-native-scalable-image";
 import ModalDropDown from "react-native-modal-dropdown";
+
+//import RNPickerSelect from "react-native-picker-select";
+//import TypeOfHobby from './selectionView';
+import * as firebase from "firebase";
 
 //Built a signup screen that includes text inputs of each placeholder. with no auto Cap and no auto correcting. Making sure everytime
 //you finish one part, it move onto the next one with the "next() or arrow" button depending on which device you have
-
 export default class signUpScreen extends React.Component {
+  //For Top Page Details
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: "Sign Up"
+    };
+  };
+
   state = {
     error: false,
     successs: false,
@@ -27,9 +35,26 @@ export default class signUpScreen extends React.Component {
     options: ["Artist", "Author"]
   };
 
+  signOut = () => {
+    firebase.auth().signOut();
+  };
+  handleSignUp = () => {
+    this.signOut();
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(userCredentials => {
+        console.log(userCredentials.user);
+        return userCredentials.user.updateProfile({
+          displayName: this.state.firstName + " " + this.state.lastName
+        });
+      })
+      .catch(error => this.setState({ errorMessage: error.message }));
+  };
+
   saveNewUser = event => {
-    console.log(`Creating new ${this.state.type}`);
-    fetch(`http://localhost:8000/api/${this.state.type}s/`, {
+    console.log(`Creating new ${this.state.type} please work`);
+    return fetch(`http://localhost:8000/api/${this.state.type}s/`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -58,6 +83,9 @@ export default class signUpScreen extends React.Component {
         });
       });
   };
+
+  /* from yt tutorial https://www.youtube.com/watch?v=TkuQAjnaSbM&t=128s */
+
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styleSignUp.container}>
@@ -65,7 +93,7 @@ export default class signUpScreen extends React.Component {
           <StatusBar barStyle="light-content" />
           <Text>Welcome To</Text>
           <Image
-            width={Dimensions.get("window").width}
+            style={{ width: 300, height: 200, resizeMode: "contain" }}
             source={require("./assets/xpression.png")}
           />
           <Text>Where Artists and Authors Unite</Text>
@@ -73,6 +101,7 @@ export default class signUpScreen extends React.Component {
           <View style={styleSignUp.rowContainer}>
             <TextInput
               id="fName"
+              borderWidth={1}
               placeholder="First Name"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
@@ -88,6 +117,7 @@ export default class signUpScreen extends React.Component {
 
             <TextInput
               id="LName"
+              borderWidth={1}
               placeholder="Last Name"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
@@ -117,10 +147,14 @@ export default class signUpScreen extends React.Component {
               placeholder="Password"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
-              onSubmitEditing={() => this.artistInput.focus()}
               secureTextEntry
               style={styleSignUp.textInputs}
               ref={input => (this.passwordInput = input)}
+              autoCorrect={false}
+              autoCapitalize="none"
+              style={styleSignUp.textInputs}
+              onChangeText={password => this.setState({ password })}
+              value={this.state.password}
             />
           </View>
 
@@ -139,24 +173,29 @@ export default class signUpScreen extends React.Component {
           />
         </View>
 
-        <TouchableOpacity>
-          <View style={styleSignUp.onebutton}>
-            <AwesomeButton
-              progress={true}
-              progressLoadingTime={10000}
-              width={100}
-              textColor="#000000"
-              backgroundColor="#5ce1e6"
-              alignItems="center"
-              onPress={() => {
-                this.saveNewUser();
-                this.props.navigation.navigate("EditProfile");
-              }}
-            >
-              Register
-            </AwesomeButton>
-          </View>
-        </TouchableOpacity>
+        <View style={styleSignUp.onebutton}>
+          <AwesomeButton
+            progress={true}
+            progressLoadingTime={10000}
+            width={100}
+            textColor="#000000"
+            backgroundColor="#5ce1e6"
+            alignItems="center"
+            onPress={() => {
+              this.handleSignUp()
+                .then(() => {
+                  return this.saveNewUser();
+                })
+                .then(() => {
+                  this.props.navigation.navigate("EditProfile", {
+                    type: this.state.type
+                  });
+                });
+            }}
+          >
+            <Text>Register</Text>
+          </AwesomeButton>
+        </View>
       </KeyboardAvoidingView>
     );
   }
@@ -189,8 +228,7 @@ const styleSignUp = StyleSheet.create({
     marginBottom: 10,
     color: "#FFF",
     paddingHorizontal: 33.5,
-    marginRight: 1,
-    borderWidth: 1
+    marginRight: 1
   },
 
   onebutton: {
@@ -204,6 +242,14 @@ const styleSignUp = StyleSheet.create({
     alignItems: "center"
   },
 
+  textInputs2: {
+    height: 40,
+    backgroundColor: "rgba(255,255,255,0.2)",
+    marginBottom: 10,
+    color: "#FFF",
+    paddingHorizontal: 33.5,
+    marginRight: 1
+  },
   selectionType: {
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 10,

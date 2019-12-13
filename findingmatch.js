@@ -1,18 +1,17 @@
 import React from "react";
 import AwesomeButton from "react-native-really-awesome-button";
-import { StyleSheet, View, Dimensions, TouchableOpacity } from "react-native";
-import Image from "react-native-scalable-image";
+import { StyleSheet, View, Image } from "react-native";
 
 class matchScreen extends React.Component {
   render() {
     return (
       <View style={matchStyleSheet.container}>
         <Image
-          width={Dimensions.get("window").width}
+          style={{ width: 300, height: 200, resizeMode: "contain" }}
           source={require("./assets/findmatch.png")}
         />
 
-        <TouchableOpacity style={matchStyleSheet.buttonContainer}>
+        <View style={matchStyleSheet.buttonContainer}>
           <View style={matchStyleSheet.shiftButton}>
             <AwesomeButton
               width={90}
@@ -34,9 +33,9 @@ class matchScreen extends React.Component {
               Message
             </AwesomeButton>
           </View>
-        </TouchableOpacity>
+        </View>
 
-        <TouchableOpacity style={matchStyleSheet.buttonContainer}>
+        <View style={matchStyleSheet.buttonContainer}>
           <View style={matchStyleSheet.shiftButton}>
             <AwesomeButton
               width={90}
@@ -58,7 +57,7 @@ class matchScreen extends React.Component {
               Deny
             </AwesomeButton>
           </View>
-        </TouchableOpacity>
+        </View>
       </View>
     );
   }

@@ -6,13 +6,78 @@ import {
   Dimensions,
   View,
   KeyboardAvoidingView,
-  StatusBar
+  StatusBar,
+  Image
 } from "react-native";
 import AwesomeButton from "react-native-really-awesome-button";
-import Image from "react-native-scalable-image";
 //Built a login that includes inputs of each placeholder needed to be filled out
+//import firebase from "firebase";
+import User from "./chatScreens/User";
+
+import * as firebase from "firebase";
 
 class loginScreen extends React.Component {
+  //For Top Page Details
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: "Log In"
+    };
+  };
+
+  state = {
+    email: "",
+    password: "",
+    errormsg: null
+  };
+
+  handleChange = key => val => {
+    this.setState({ [key]: val });
+  };
+
+  // componentWillMount(){
+  //   AsyncStorage.getItem('userEmail').then(val => {
+  //     if(val){
+  //       this.setState({ email : val })
+  //     }
+  //   })
+  // }
+
+  submitForm = async () => {
+    if (this.state.email.length < 3) {
+      Alert.alert("Error", "Wrong Email Address");
+    } else if (this.state.name.length < 2) {
+      Alert.alert("Error", "Wrong name!");
+    } else {
+      await AsyncStorage.setItem("userEmail", this.state.email);
+      User.email = this.state.email;
+      firebase
+        .database()
+        .ref("users/" + User.email)
+        .set({ name: this.state.name });
+    }
+  };
+
+  //authentication vr. 0
+  // Login = (email, password) => {
+  //   try {
+  //     firebase
+  //        .auth()
+  //        .signInWithEmailAndPassword(email, password)
+  //        .then(res => {
+  //            console.log(res.user.email);
+  //     });
+  //   } catch (error) {
+  //     console.log(error.toString(error));
+  //   }
+  // };
+  handleLogin = () => {
+    const { email, password } = this.state;
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .catch(error => this.setState({ errormsg: error.message }));
+  };
+
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styleLogin.container}>
@@ -21,7 +86,7 @@ class loginScreen extends React.Component {
           <Text>Welcome To</Text>
 
           <Image
-            width={Dimensions.get("window").width}
+            style={{ width: 300, height: 200, resizeMode: "contain" }}
             source={require("./assets/xpression.png")}
           />
 
@@ -37,6 +102,9 @@ class loginScreen extends React.Component {
               autoCapitalize="none"
               autoCorrect={false}
               style={styleLogin.textInput}
+              //for chatScreen
+              value={this.state.email}
+              onChangeText={this.handleChange("email")}
             />
 
             <TextInput
@@ -45,7 +113,11 @@ class loginScreen extends React.Component {
               returnKeyType="go"
               secureTextEntry
               style={styleLogin.textInput}
-              ref={input => (this.passwordInput = input)} //refer to onsubmitediting, this helps move onto the next input
+              //refer to onsubmitediting, this helps move onto the next input
+              ref={input => (this.passwordInput = input)}
+              //for chatScreen
+              value={this.state.password}
+              onChangeText={this.handleChange("password")}
             />
           </View>
           <AwesomeButton
@@ -56,8 +128,14 @@ class loginScreen extends React.Component {
             backgroundColor="#5ce1e6"
             onPress={() => this.props.navigation.navigate("DisplayProfile")}
           >
-            Login
+            <Text>Login</Text>
           </AwesomeButton>
+
+          <View style={styleLogin.errorMessage}>
+            {this.state.errorMessage && (
+              <Text style={styleLogin.error}>{this.state.errorMessage}</Text>
+            )}
+          </View>
         </View>
       </KeyboardAvoidingView>
     );
@@ -74,6 +152,10 @@ const styleLogin = StyleSheet.create({
     justifyContent: "center"
   },
 
+  button1: {
+    marginRight: 50,
+    padding: 20
+  },
   loginContainer: {
     padding: 20
   },
@@ -85,5 +167,17 @@ const styleLogin = StyleSheet.create({
     color: "#FFF",
     paddingHorizontal: 50,
     borderWidth: 1
+  },
+  errorMessage: {
+    //height: 72,
+    alignItems: "center",
+    justifyContent: "center"
+    //marginHorizontal: 30
+  },
+  error: {
+    color: "#E9446A",
+    fontSize: 13,
+    fontWeight: "600",
+    textAlign: "center"
   }
 });

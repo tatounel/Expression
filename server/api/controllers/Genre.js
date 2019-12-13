@@ -12,7 +12,9 @@ const { Genre } = db;
 //    DELETE /genres/:id
 
 router.get("/", (req, res) => {
-  Genre.findAll({}).then(genres => res.json(genres));
+  Genre.findAll({}).then(genres => {
+    res.json(genres);
+  });
 });
 
 router.post("/", (req, res) => {

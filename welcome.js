@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  TouchableOpacity
-} from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import AwesomeButton from "react-native-really-awesome-button";
-import Image from "react-native-scalable-image";
 
 //built a class that includes the touchability to move forward to the next page for each button
 
@@ -17,12 +10,12 @@ class WelcomeScreen extends React.Component {
       <View style={styleWelcome.container}>
         <Text>Welcome To</Text>
         <Image
-          width={Dimensions.get("window").width}
+          style={{ width: 300, height: 200, resizeMode: "contain" }}
           source={require("./assets/xpression.png")}
         />
         <Text>Where Artists and Authors Unite</Text>
 
-        <TouchableOpacity style={styleWelcome.buttoncontainer}>
+        <View style={styleWelcome.buttoncontainer}>
           <View style={styleWelcome.button1}>
             <AwesomeButton
               width={80}
@@ -46,7 +39,7 @@ class WelcomeScreen extends React.Component {
               Sign Up
             </AwesomeButton>
           </View>
-        </TouchableOpacity>
+        </View>
       </View>
     );
   }
