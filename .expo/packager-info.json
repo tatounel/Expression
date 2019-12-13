@@ -1,3 +1,4 @@
+
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
@@ -5,5 +6,10 @@
   "packagerPid": 13676,
   "expoServerNgrokUrl": "https://62-zxk.anonymous.expression.exp.direct",
   "packagerNgrokUrl": "https://packager.62-zxk.anonymous.expression.exp.direct",
+<<<<<<< HEAD
   "ngrokPid": 13580
+=======
+  "ngrokPid": 16296
+>>>>>>> 8032acc79003dc7a051545685986f495c9687ee0
 }
+

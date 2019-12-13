@@ -1,9 +1,21 @@
 import React from "react";
 import AwesomeButton from "react-native-really-awesome-button";
+<<<<<<< HEAD
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
+=======
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  TouchableOpacity,
+  ScrollView
+} from "react-native";
+>>>>>>> 8032acc79003dc7a051545685986f495c9687ee0
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
+import Image from "react-native-scalable-image";
 
 export default class artistContentScreen extends React.Component {
   state = {
@@ -25,6 +37,7 @@ export default class artistContentScreen extends React.Component {
           </View>
         </ScrollView>
 
+<<<<<<< HEAD
         <AwesomeButton
           width={70}
           textColor="#000000"
@@ -33,6 +46,17 @@ export default class artistContentScreen extends React.Component {
         >
           <Text>Add New</Text>
         </AwesomeButton>
+=======
+        <TouchableOpacity>
+          <AwesomeButton
+            textColor="#000000"
+            backgroundColor="#5ce1e6"
+            onPress={this._pickImage}
+          >
+            <Text>Add New</Text>
+          </AwesomeButton>
+        </TouchableOpacity>
+>>>>>>> 8032acc79003dc7a051545685986f495c9687ee0
       </View>
     );
   }

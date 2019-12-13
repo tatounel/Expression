@@ -6,9 +6,16 @@ import {
   StyleSheet,
   TouchableOpacity,
   KeyboardAvoidingView,
+<<<<<<< HEAD
   Image,
   AsyncStorage
 } from "react-native";
+=======
+  SafeAreaView,
+  AsyncStorage
+} from "react-native";
+import Image from "react-native-scalable-image";
+>>>>>>> 8032acc79003dc7a051545685986f495c9687ee0
 import MultipleTags from "react-native-multiple-tags";
 
 import User from "./chatScreens/User";
@@ -154,6 +161,10 @@ export default class profileDisplayScreen extends React.Component {
           <Image
             style={{ width: 300, height: 200, resizeMode: "contain" }}
             source={require("./assets/faceicon.png")}
+<<<<<<< HEAD
+=======
+            style={styleDisplayProfile.facePic}
+>>>>>>> 8032acc79003dc7a051545685986f495c9687ee0
           />
           <Text>Upload Your First Image</Text>
           {/* <MultipleTags
@@ -194,6 +205,7 @@ export default class profileDisplayScreen extends React.Component {
                 backgroundColor="#5ce1e6"
                 onPress={() => this.props.navigation.navigate("MatchContent")}
               >
+<<<<<<< HEAD
                 <Text>Find A Match</Text>
               </AwesomeButton>
             </View>
@@ -202,6 +214,16 @@ export default class profileDisplayScreen extends React.Component {
           <View onPress={this.logOut}>
             <Text style={styleDisplayProfile.logout}>Logout</Text>
           </View>
+=======
+               <Text>Find A Match</Text>
+              </AwesomeButton>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.logOut}>
+            <Text style={styleDisplayProfile.logout}>Logout</Text>
+          </TouchableOpacity>
+>>>>>>> 8032acc79003dc7a051545685986f495c9687ee0
         </View>
       </KeyboardAvoidingView>
     );
