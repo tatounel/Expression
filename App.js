@@ -12,6 +12,8 @@ import artistContentScreen from "./artistcontent";
 import authorContentScreen from "./authorcontent";
 import writingContentScreen from "./writingcontent";
 import matchScreen from "./findingmatch";
+import chatHomeScreen from "./chatScreens/homeScreen";
+import chatScreen from "./chatScreens/chatScreen";
 //Calling in the files for it to stack and work as a moving screen
 
 import LoadingScreen from "./chatScreens/LoadingScreen";
@@ -57,6 +59,20 @@ const MainNavigator = createStackNavigator({
     screen: loginScreen,
     navigationOptions: () => ({
       title: `Login Page`,
+      headerBackTitle: null
+    })
+  },
+  ChatHomeScreen: {
+    screen: chatHomeScreen,
+    navigationOptions: () => ({
+      title: `Chat Home Screen`,
+      headerBackTitle: null
+    })
+  },
+  ChatScreen: {
+    screen: chatScreen,
+    navigationOptions: () => ({
+      title: `Chat`,
       headerBackTitle: null
     })
   },
