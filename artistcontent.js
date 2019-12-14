@@ -14,10 +14,7 @@ export default class artistContentScreen extends React.Component {
   render() {
     return (
       <View style={styleArtist.Container}>
-        <Image
-          style={{ width: 300, height: 200, resizeMode: "contain" }}
-          source={require("./assets/xpress.png")}
-        />
+        <Image width={300} source={require("./assets/xpress.png")} />
         <ScrollView>
           <View style={styleArtist.imgContentPositionColumn}>
             <View style={styleArtist.imgContentPosition}>

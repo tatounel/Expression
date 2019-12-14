@@ -1,6 +1,6 @@
 import React from "react";
 import AwesomeButton from "react-native-really-awesome-button";
-import { ScrollView, StyleSheet, View, Image } from "react-native";
+import { ScrollView, StyleSheet, View, Image, Text } from "react-native";
 
 export default class authorContentScreen extends React.Component {
   render() {

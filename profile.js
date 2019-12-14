@@ -310,10 +310,7 @@ export default class createProfileScreen extends React.Component {
           style={styleCreateProfile.container}
         >
           <View style={styleCreateProfile.container}>
-            <Image
-              style={{ width: 300, height: 200, resizeMode: "contain" }}
-              source={require("./assets/profile.png")}
-            />
+            <Image width={300} source={require("./assets/profile.png")} />
             <TouchableOpacity onPress={this._pickImage}>
               <View>
                 {photo && (

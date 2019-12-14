@@ -16,6 +16,8 @@ import matchScreen from "./findingmatch";
 
 import LoadingScreen from "./chatScreens/LoadingScreen";
 import firebase from "firebase";
+
+console.disableYellowBox = true;
 // Web app's Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyAO19aZCQkjfLSIuMdLx1hiLcaLTrioVQ0",
