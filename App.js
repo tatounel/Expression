@@ -12,10 +12,14 @@ import artistContentScreen from "./artistcontent";
 import authorContentScreen from "./authorcontent";
 import writingContentScreen from "./writingcontent";
 import matchScreen from "./findingmatch";
+import chatHomeScreen from "./chatScreens/homeScreen";
+import chatScreen from "./chatScreens/chatScreen";
 //Calling in the files for it to stack and work as a moving screen
 
 import LoadingScreen from "./chatScreens/LoadingScreen";
-import * as firebase from "firebase";
+import firebase from "firebase";
+
+console.disableYellowBox = true;
 // Web app's Firebase configuration
 var firebaseConfig = {
   apiKey: "AIzaSyAO19aZCQkjfLSIuMdLx1hiLcaLTrioVQ0",
@@ -55,6 +59,20 @@ const MainNavigator = createStackNavigator({
     screen: loginScreen,
     navigationOptions: () => ({
       title: `Login Page`,
+      headerBackTitle: null
+    })
+  },
+  ChatHomeScreen: {
+    screen: chatHomeScreen,
+    navigationOptions: () => ({
+      title: `Chat Home Screen`,
+      headerBackTitle: null
+    })
+  },
+  ChatScreen: {
+    screen: chatScreen,
+    navigationOptions: () => ({
+      title: `Chat`,
       headerBackTitle: null
     })
   },

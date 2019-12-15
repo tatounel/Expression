@@ -8,13 +8,13 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  SafeAreaView,
-  Image
+  SafeAreaView
 } from "react-native";
 import MultiSelect from "react-native-multiple-select";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import * as firebase from "firebase";
+import Image from "react-native-scalable-image";
 
 import Constants from "expo-constants";
 
@@ -22,6 +22,7 @@ export default class createProfileScreen extends React.Component {
   constructor(props) {
     super(props);
     this.type = props.navigation.state.params.type;
+    console.log(this.type);
     if (this.type == "Author") {
       this.genreOrStyle = "genres";
       this.interests = "styles";
@@ -29,6 +30,23 @@ export default class createProfileScreen extends React.Component {
       this.genreOrStyle = "styles";
       this.interests = "genres";
     }
+
+    this.state = {
+      //We will store selected item in this
+      selectedInterests: [],
+      interests: [],
+      selectedGenresOrStyles: [],
+      genresOrStyles: [],
+      success: true,
+      error: false,
+      photo: null,
+      email: "",
+      password: "",
+      id: "",
+      bio: "",
+      usersInterests: "",
+      usersGenresOrStyles: ""
+    };
   }
 
   //For Top Page Details
@@ -38,28 +56,12 @@ export default class createProfileScreen extends React.Component {
     };
   };
 
-  state = {
-    //We will store selected item in this
-    selectedInterests: [],
-    interests: [],
-    selectedGenresOrStyles: [],
-    genresOrStyles: [],
-    success: true,
-    error: false,
-    photo: null,
-    email: "",
-    password: "",
-    id: "",
-    bio: "",
-    usersInterests: "",
-    usersGenresOrStyles: "",
-    photo: null
-  };
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user != null) {
         const { email, password } = user;
         this.setState({ email, password });
+        console.log(email + " got user on profile.js");
       } else {
         console.log("User not created");
       }
@@ -89,13 +91,10 @@ export default class createProfileScreen extends React.Component {
     this.setState({ selectedGenresOrStyles });
     //Set Selected Items
   };
-  signOut = () => {
+  signOut = async () => {
     firebase.auth().signOut();
-  };
-  //logout Button
-  logOut = async () => {
     await AsyncStorage.clear();
-    this.props.navigation.navigate("Auth");
+    this.props.navigation.navigate("Welcome");
   };
 
   getUserByEmail = () => {
@@ -118,21 +117,27 @@ export default class createProfileScreen extends React.Component {
         this.setState({
           success: true
         });
-        //console.log(authors);
+        console.log(authorsOrArtists);
         let currentUser = null;
+        console.log(authorsOrArtists.length);
         authorsOrArtists.filter(authorOrArtist => {
           let obj = authorOrArtist;
           if (obj.email == this.state.email) {
             console.log("FOUND MATCH EMAIL");
-            console.log(obj.email + " == " + this.state.email);
             currentUser = obj;
+          } else {
+            console.log(obj.email + " NOT A MATCH FOR " + this.state.email);
           }
         });
-        this.setState({
-          id: currentUser.id
-        });
-        console.log(currentUser.id);
-        console.log(this.state.id);
+        this.setState(
+          {
+            id: currentUser.id
+          },
+          () => {
+            console.log(currentUser.id);
+            console.log(this.state.id);
+          }
+        );
       })
       .catch(err => {
         this.setState({
@@ -168,7 +173,7 @@ export default class createProfileScreen extends React.Component {
         this.setState({
           interests: items
         });
-        console.log(this.state.interests);
+        // console.log(this.state.interests);
       })
       .catch(err => {
         this.setState({
@@ -205,7 +210,7 @@ export default class createProfileScreen extends React.Component {
         this.setState({
           genresOrStyles: items
         });
-        console.log(this.state.genresOrStyles);
+        // console.log(this.state.genresOrStyles);
       })
       .catch(err => {
         this.setState({
@@ -214,7 +219,7 @@ export default class createProfileScreen extends React.Component {
       });
   };
 
-  updateUser = event => {
+  updateUser = async event => {
     // console.log(this.state.interests[1].name);
     // console.log(this.state.genresOrStyles[1].name);
 
@@ -229,10 +234,15 @@ export default class createProfileScreen extends React.Component {
       console.log(this.state.interests[num].name);
     }
     console.log(temp + "temp before set state of users interests");
-    this.setState({
+    await this.setState({
       usersInterests: temp.toString()
     });
-    console.log(temp.toString() + " temp as string");
+    console.log(
+      temp.toString() +
+        " temp as string" +
+        this.state.usersInterests +
+        " just checking if set state works"
+    );
     temp = [];
     let genresOrStylesNum = this.state.selectedGenresOrStyles.length;
     console.log(
@@ -249,12 +259,15 @@ export default class createProfileScreen extends React.Component {
       temp.push(this.state.genresOrStyles[num].name);
     }
     console.log(temp + "temp before set state of users genres or styles");
-    this.setState({
+    await this.setState({
       usersGenresOrStyles: temp.toString()
     });
     console.log(temp.toString() + " temp as string");
 
     console.log(`Updating user ${this.state.id}`);
+    console.log(`${this.state.usersGenresOrStyles}`);
+    console.log(`${this.state.bio}`);
+    console.log(`${this.state.usersInterests}`);
     let temp2 = this.genreOrStyle.slice(0, -1);
     return fetch(`http://localhost:8000/api/${this.type}s/${this.state.id}`, {
       method: "PUT",
@@ -297,10 +310,7 @@ export default class createProfileScreen extends React.Component {
           style={styleCreateProfile.container}
         >
           <View style={styleCreateProfile.container}>
-            <Image
-              style={{ width: 300, height: 200, resizeMode: "contain" }}
-              source={require("./assets/profile.png")}
-            />
+            <Image width={300} source={require("./assets/profile.png")} />
             <TouchableOpacity onPress={this._pickImage}>
               <View>
                 {photo && (
@@ -311,10 +321,9 @@ export default class createProfileScreen extends React.Component {
                     source={{ uri: photo }}
                   />
                 )}
-              </View>
-              <View style={styleCreateProfile.photoTxt}>
                 <Text>Upload photo</Text>
               </View>
+              <View style={styleCreateProfile.photoTxt}></View>
             </TouchableOpacity>
 
             <View style={styleCreateProfile.textContainer}>
@@ -382,11 +391,18 @@ export default class createProfileScreen extends React.Component {
 
             <View style={styleCreateProfile.editProfileButton}>
               <AwesomeButton
-                width={80}
+                progress={true}
+                progressLoadingTime={3000}
+                width={100}
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
+                alignItems="center"
                 onPress={() => {
+                  console.log("button pressed in profile");
                   this.updateUser().then(() => {
+                    console.log(
+                      "update user function has been called, now going to display profile"
+                    );
                     this.props.navigation.navigate("DisplayProfile", {
                       id: this.state.id,
                       type: this.type
@@ -457,8 +473,19 @@ const styleCreateProfile = StyleSheet.create({
     borderWidth: 1
   },
 
+  editProfileButton: {
+    alignItems: "center",
+    textAlign: "right"
+  },
+
   textContainer: {
     padding: 20
+  },
+
+  onebutton: {
+    marginBottom: 20,
+    alignItems: "center",
+    textAlign: "right"
   },
 
   photoTxt: {

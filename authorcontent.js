@@ -1,6 +1,6 @@
 import React from "react";
 import AwesomeButton from "react-native-really-awesome-button";
-import { ScrollView, StyleSheet, View, Image } from "react-native";
+import { ScrollView, StyleSheet, View, Image, Text } from "react-native";
 
 export default class authorContentScreen extends React.Component {
   render() {
@@ -19,7 +19,7 @@ export default class authorContentScreen extends React.Component {
           backgroundColor="#5ce1e6"
           onPress={() => this.props.navigation.navigate("WritingContent")}
         >
-          Add New
+          <Text>Add New</Text>
         </AwesomeButton>
       </View>
     );

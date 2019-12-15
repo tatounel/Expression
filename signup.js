@@ -30,7 +30,9 @@ export default class signUpScreen extends React.Component {
     lastName: "",
     email: "",
     type: "",
-    options: ["Artist", "Author"]
+    options: ["Artist", "Author"],
+    password: "",
+    errorMessage: null
   };
 
   signOut = () => {
@@ -107,9 +109,7 @@ export default class signUpScreen extends React.Component {
               autoCapitalize="none"
               autoCorrect={false}
               style={styleSignUp.textInputs2}
-              onChangeText={firstName =>
-                this.setState({ firstName: firstName })
-              }
+              onChangeText={firstName => this.setState({ firstName })}
               value={this.state.firstName}
             />
 
@@ -124,7 +124,7 @@ export default class signUpScreen extends React.Component {
               autoCorrect={false}
               style={styleSignUp.textInputs2}
               ref={input => (this.lastName = input)}
-              onChangeText={lastName => this.setState({ lastName: lastName })}
+              onChangeText={lastName => this.setState({ lastName })}
               value={this.state.lastName}
             />
           </View>
@@ -133,6 +133,7 @@ export default class signUpScreen extends React.Component {
             <TextInput
               id="emailing"
               placeholder="E-Mail"
+              autoCapitalize="none"
               placeholderTextColor="rgba(255,255,255,0.7)"
               returnKeyType="next"
               onSubmitEditing={() => this.passwordInput.focus()}
@@ -141,7 +142,7 @@ export default class signUpScreen extends React.Component {
               keyboardType="email-address"
               style={styleSignUp.textInputs}
               ref={input => (this.eMail = input)}
-              onChangeText={email => this.setState({ email: email })}
+              onChangeText={email => this.setState({ email })}
               value={this.state.email}
             />
 
@@ -178,7 +179,7 @@ export default class signUpScreen extends React.Component {
         <View style={styleSignUp.onebutton}>
           <AwesomeButton
             progress={true}
-            progressLoadingTime={5000}
+            progressLoadingTime={3000}
             width={100}
             textColor="#000000"
             backgroundColor="#5ce1e6"
@@ -221,6 +222,7 @@ const styleSignUp = StyleSheet.create({
     marginBottom: 10,
     color: "#FFF",
     paddingHorizontal: 103,
+    marginRight: 1,
     borderWidth: 1
   },
 
@@ -244,14 +246,6 @@ const styleSignUp = StyleSheet.create({
     alignItems: "center"
   },
 
-  textInputs2: {
-    height: 40,
-    backgroundColor: "rgba(255,255,255,0.2)",
-    marginBottom: 10,
-    color: "#FFF",
-    paddingHorizontal: 33.5,
-    marginRight: 1
-  },
   selectionType: {
     backgroundColor: "rgba(255,255,255,0.2)",
     marginBottom: 10,

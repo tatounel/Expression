@@ -69,6 +69,12 @@ export default class profileDisplayScreen extends React.Component {
       });
   };
 
+  signOut = async () => {
+    firebase.auth().signOut();
+    await AsyncStorage.clear();
+    this.props.navigation.navigate("Welcome");
+  };
+
   //this is so You can't press back on the hardware for any device once you Login
   componentDidMount() {
     console.log("Component did mount on display profile called");
@@ -79,11 +85,6 @@ export default class profileDisplayScreen extends React.Component {
     //   return true;
     // });
   }
-  //logout Button
-  logOut = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate("Auth");
-  };
 
   //For Top Page Details
   static navigationOptions = ({ navigation }) => {
@@ -155,7 +156,7 @@ export default class profileDisplayScreen extends React.Component {
             style={{ width: 300, height: 200, resizeMode: "contain" }}
             source={require("./assets/faceicon.png")}
           />
-          <Text>Upload Your First Image</Text>
+          {/* <Text>Upload Your First Image</Text> */}
           {/* <MultipleTags
             tags={this.state.genreOrStyle}
             // search
@@ -182,7 +183,18 @@ export default class profileDisplayScreen extends React.Component {
                 width={120}
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
-                onPress={() => this.props.navigation.navigate("ArtistContent")}
+                onPress={() => {
+                  if (this.type == "Artist")
+                    this.props.navigation.navigate("ArtistContent", {
+                      id: this.id,
+                      type: this.type
+                    });
+                  else
+                    this.props.navigation.navigate("AuthorContent", {
+                      id: this.id,
+                      type: this.type
+                    });
+                }}
               >
                 <Text>See XPression</Text>
               </AwesomeButton>
@@ -192,16 +204,29 @@ export default class profileDisplayScreen extends React.Component {
                 width={120}
                 textColor="#000000"
                 backgroundColor="#5ce1e6"
-                onPress={() => this.props.navigation.navigate("MatchContent")}
+                onPress={() =>
+                  this.props.navigation.navigate("MatchContent", {
+                    id: this.id,
+                    type: this.type
+                  })
+                }
               >
                 <Text>Find A Match</Text>
               </AwesomeButton>
             </View>
           </View>
 
-          <View onPress={this.logOut}>
-            <Text style={styleDisplayProfile.logout}>Logout</Text>
-          </View>
+          <AwesomeButton
+            textColor="#000000"
+            width={120}
+            backgroundColor="#5ce1e6"
+            onPress={() => {
+              this.signOut();
+              this.props.navigation.navigate("Welcome");
+            }}
+          >
+            <Text>Logout</Text>
+          </AwesomeButton>
         </View>
       </KeyboardAvoidingView>
     );
