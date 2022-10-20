@@ -23,7 +23,7 @@
     "react-native-multiple-select": "^0.5.5",
     "react-native-multiple-tags": "^0.0.4",
     "react-native-really-awesome-button": "^1.4.2",
-    "react-native-reanimated": "~1.2.0",
+    "react-native-reanimated": "~2.10.0",
     "react-native-scalable-image": "^1.0.0",
     "react-native-tags": "^2.1.0",
     "react-native-web": "^0.11.7",
